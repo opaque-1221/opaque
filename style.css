@@ -1,0 +1,387 @@
+/* ==========================================================================
+   1. 全域變數與基礎樣式 (CSS Variables & Reset)
+   ========================================================================== */
+:root {
+  --color-white: #ffffff;
+  --color-black: #111111;
+  --color-text-dark: #191919;
+  --color-text-sub: #757575;
+  --color-border-light: #e5e5e5;
+  --color-bg-light: #f6f7f9;
+  --navbar-height: 72px;
+  --font-brand: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Noto Sans TC', 'Montserrat', -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-white);
+  color: var(--color-text-dark);
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  padding: 0;
+}
+
+
+
+/* ==========================================================================
+   2. 固定導覽列 (Fixed Navbar) - Z-index: 1000
+   ========================================================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--navbar-height);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 44px;
+  background-color: transparent; 
+  color: var(--color-white);      
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.navbar.scrolled {
+  background-color: var(--color-white);
+  color: var(--color-text-dark);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.nav-menu-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+
+.nav-menu-btn span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: currentColor;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.nav-center-slot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: currentColor;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.nav-icon-btn:hover {
+  opacity: 0.75;
+  transform: translateY(-1px);
+}
+
+.nav-icon-btn svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.7;
+  stroke: currentColor;
+  fill: none;
+}
+
+/* ==========================================================================
+   3. 核心大 Logo - 初始 Z-index: 50 (藏在白色內容區之下)
+   ========================================================================== */
+.brand-logo {
+  position: fixed;
+  left: 50%;
+  top: 70vh; /* 初始位置：偏下 */
+  transform: translate(-50%, -50%) scale(1);
+  transform-origin: center center;
+  z-index: 50; /* 魔法關鍵一：讓它被下方的白色區塊蓋住 */
+  color: var(--color-white);
+  user-select: none;
+  pointer-events: none;
+  will-change: top, transform, color;
+  transition: color 0.1s ease; /* 瞬間換色 */
+  
+  /* 魔法關鍵二：將 Logo 高度寫死，確保 JS 數學運算 100% 精準 */
+  height: 140px; 
+  width: auto;
+  max-width: 90vw;
+}
+
+/* ==========================================================================
+   4. Hero 首圖區塊 - Z-index: 10 (最底層)
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background-color: #2c2f35;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  /* 
+     第一層：linear-gradient 是壓暗 20% 的黑色半透明遮罩 (0.2 代表 20%)
+     第二層：url 裡面放你自己的圖片路徑
+  */
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url('./images/Hero_1.jpg'); 
+  background-size: cover;
+  background-position: center; /* 如果你的主角偏上或偏下，這裡可以改成 top 或 bottom */
+  background-repeat: no-repeat;
+}
+
+.hero-placeholder-fallback {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #c7cacf 0%, #b0b4bc 100%);
+  z-index: -1;
+}
+
+/* ==========================================================================
+   5. 商品主內容區 (Category & Products) - Z-index: 100 (帶有白底遮罩功能)
+   ========================================================================== */
+.main-content {
+  position: relative;
+  z-index: 100; /* 魔法關鍵三：層級高於 Logo，往上滑時自動蓋住超出的 Logo 尾巴 */
+  background-color: var(--color-white);
+  padding: 70px 0 100px;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.category-section {
+  margin-bottom: 64px;
+}
+
+.category-track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  border-bottom: 1px solid var(--color-border-light); 
+}
+
+.category-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 22px;
+  cursor: pointer;
+  user-select: none;
+  color: var(--color-text-sub);
+  transition: color 0.25s ease;
+}
+
+.category-item:hover { color: var(--color-text-dark); }
+.category-item.active { color: var(--color-text-dark); font-weight: 600; }
+
+.category-icon-box {
+  width: 100%;
+  height: 120px; /* <--- 這裡可以調大，給商品圖更多呼吸空間 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  transition: transform 0.25s ease;
+}
+
+.category-item:hover .category-icon-box { transform: translateY(-4px); }
+.category-icon-box svg { width: 72px; height: 72px; stroke: #777; fill: none; stroke-width: 1.4; }
+
+.category-title { font-size: 13.5px; letter-spacing: 0.04em; }
+.category-title .sub-en { font-size: 11.5px; font-weight: 300; color: #999; margin-left: 6px; }
+
+.category-active-line {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background-color: var(--color-black);
+  z-index: 2;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), width 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, width;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   6. 商品列表網格
+   ========================================================================== */
+.products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px 32px; }
+.product-card { display: flex; flex-direction: column; cursor: pointer; }
+.product-image-wrap { position: relative; width: 100%; aspect-ratio: 1 / 1; background-color: var(--color-bg-light); margin-bottom: 16px; overflow: hidden; border-radius: 2px; }
+.product-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.product-card:hover .product-image-wrap img { transform: scale(1.04); }
+.product-meta { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; }
+.product-name { font-size: 20px; font-weight: 400; color: var(--color-text-dark); letter-spacing: 0.06em; }
+.product-price { font-family: var(--font-brand); font-size: 20px; font-weight: 500; color: #444; }
+
+/* ==========================================================================
+   7. 頁尾與回頂端按鈕
+   ========================================================================== */
+.footer { 
+  background-color: #f4f5f7; /* 呼應參考圖的淡灰底色 */
+  padding: 80px 44px; 
+  border-top: 1px solid var(--color-border-light); 
+  font-size: 14px; 
+  color: #333333; 
+}
+
+.footer-inner { 
+  max-width: 1140px; 
+  margin: 0 auto; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: flex-start; 
+}
+
+/* 左側品牌區塊設定 */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Logo 與社群按鈕的垂直間距 */
+}
+
+.footer-logo-link {
+  display: inline-block;
+}
+
+.footer-logo-svg {
+  height: 24px; /* 設定 SVG Logo 大小，可依喜好微調 */
+  width: auto;
+  color: var(--color-black);
+  transition: opacity 0.2s ease;
+}
+
+.footer-logo-link:hover .footer-logo-svg {
+  opacity: 0.7;
+}
+
+/* 社群 Icon 設定 */
+.social-icons {
+  display: flex;
+  gap: 16px;
+}
+
+.social-icon {
+  width: 28px;
+  height: 28px;
+  color: #999999; /* 淺灰色 Icon */
+  transition: color 0.25s ease, transform 0.2s ease;
+}
+
+.social-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.social-icon:hover {
+  color: var(--color-black);
+  transform: translateY(-2px); /* 滑鼠懸停時微幅上浮 */
+}
+
+/* 右側連結區塊設定 */
+.footer-links-row { 
+  display: flex; 
+  gap: 80px; /* 欄與欄之間的間距 */
+}
+
+.footer-links-col { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 18px; /* 連結的垂直間距 */
+}
+
+.footer-links-col a {
+  color: #666666;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+
+.footer-links-col a:hover {
+  color: var(--color-black);
+}
+
+.back-to-top {
+  position: fixed; right: 28px; bottom: 28px; width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--color-border-light); background-color: var(--color-white); color: var(--color-text-dark);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.2s; z-index: 999; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+
+/* RWD 手機版適應 */
+@media (max-width: 820px) {
+  .navbar { padding: 0 20px; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
+  .category-title .sub-en { display: none; }
+  /* 手機版卡片很窄，名稱與價格縮小一點避免擠在一起 */
+  .product-name, .product-price { font-size: 16px; }
+  .brand-logo { height: 90px; } 
+  
+  /* 頁尾手機版改為直向排列 */
+  .footer-inner { flex-direction: column; gap: 48px; }
+  .footer-links-row { gap: 40px; flex-wrap: wrap; }
+}

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OPAQUE | 極簡質感生活選物</title>
+  
+  <!-- 引入 Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- 引入外部 CSS 樣式表 -->
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== Custom Cursor（16px 實心圓）===== */
+    @media (hover: hover) and (pointer: fine) {
+      html.has-cursor, html.has-cursor * { cursor: none !important; }
+      .custom-cursor {
+        position: fixed; left: 0; top: 0; width: 16px; height: 16px; border-radius: 50%;
+        background: #111111; box-shadow: none;
+        pointer-events: none; z-index: 100000; opacity: 0;
+        transition: background-color 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease, scale 0.18s ease-out;
+        will-change: translate, scale;
+      }
+      .custom-cursor.visible { opacity: 1; }
+      /* 商品圖：游標變成毛玻璃圓形 + VIEW（圓心不變，往四周長大） */
+      .custom-cursor { display: flex; align-items: center; justify-content: center; margin: 0; }
+      .custom-cursor span { font-family: var(--font-brand, 'Montserrat', sans-serif); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-indent: 0.14em; color: rgba(34,34,34,0.85); opacity: 0; transition: opacity 0.15s ease; user-select: none; }
+      .custom-cursor.is-view { width: 72px; height: 72px; margin: -28px 0 0 -28px; background: rgba(170,170,170,0.42); -webkit-backdrop-filter: blur(7px) saturate(1.1); backdrop-filter: blur(7px) saturate(1.1); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35); scale: 1; }
+      .custom-cursor.is-view span { opacity: 1; transition-delay: 0.1s; }
+      .custom-cursor { transition: width 0.28s cubic-bezier(0.2, 0.7, 0.3, 1), height 0.28s cubic-bezier(0.2, 0.7, 0.3, 1), margin 0.28s cubic-bezier(0.2, 0.7, 0.3, 1), background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, scale 0.18s ease-out; }
+      /* hover 到可點擊元素：16px → 14px（scale 0.875），平滑縮小，無彈跳 */
+      .custom-cursor.is-small { scale: 0.875; }
+      /* 只有「加入購物車」與「討論區」hover 時才變紅，沒有 glow */
+      .custom-cursor.is-red { background: #c8161d; box-shadow: none; }
+      /* 正式進入討論區後：永遠紅色 + 細微紅色光暈 */
+      body.hacked .custom-cursor, body.hacked .custom-cursor.is-red {
+        background: #c8161d; box-shadow: 0 0 10px 4px rgba(200, 22, 29, 0.65), 0 0 26px 10px rgba(200, 22, 29, 0.35);
+      }
+    }
+
+    /* ===== Intro：進場動畫期間鎖定捲動，並先隱藏標準字避免閃一下 ===== */
+    html.intro-playing, body.intro-playing { overflow: hidden; }
+    html.intro-playing { scrollbar-gutter: stable; }            /* 鎖定時保留捲軸空間，標準字位置不會偏移 */
+    html.intro-playing .brand-logo path { opacity: 0; }
+  </style>
+  <script>
+    /* 尚未載入前就先加上 class（減少動態效果的使用者不播放） */
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('intro-playing');
+  </script>
+</head>
+<body>
+
+  <!-- ==================== 導覽列 (Navbar) ==================== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-left">
+      <button class="nav-menu-btn" id="menuBtn" aria-label="選單目錄">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-center-slot" aria-hidden="true"></div>
+    <div class="nav-actions">
+      <button class="nav-icon-btn" aria-label="搜尋商品"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"></circle><line x1="16.5" y1="16.5" x2="21.5" y2="21.5"></line></svg></button>
+      <button class="nav-icon-btn" aria-label="會員中心"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></button>
+      <button class="nav-icon-btn" aria-label="購物車"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></button>
+    </div>
+  </header>
+
+  <!-- ==================== 向量 SVG Logo ==================== -->
+  <svg id="brandLogo" class="brand-logo" data-name="圖層 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 721.83 122.52" fill="currentColor">
+    <path fill="currentColor" d="M58.81.48C26.89,1.51,1.07,27.33.03,59.25c-.55,16.99,5.77,32.97,17.8,45,11.55,11.55,26.73,17.83,42.95,17.83.68,0,1.37-.01,2.05-.03,31.92-1.04,57.73-26.86,58.77-58.77.55-16.99-5.77-32.97-17.8-45C91.78,6.25,75.8-.03,58.81.48ZM89.43,89.88c-8.04,8.04-19.17,12.34-30.52,11.83-20.66-.95-37.59-17.88-38.54-38.54-.52-11.36,3.79-22.48,11.83-30.52,7.6-7.6,17.96-11.87,28.67-11.87.62,0,1.23.01,1.85.04,20.66.95,37.59,17.88,38.54,38.54.52,11.36-3.79,22.48-11.83,30.52Z"/>
+    <path fill="currentColor" d="M596.19,0h-9.42v70.15c0,8.51-3.35,16.51-9.44,22.5-6.08,5.99-14.12,9.28-22.65,9.09-17.15-.26-31.11-14.68-31.11-32.14V0h-9.42c-6.02,0-10.91,4.9-10.91,10.91v58.64c0,28.69,23.07,52.26,51.42,52.53.17,0,.35,0,.52,0,13.76,0,26.71-5.33,36.52-15.04,9.93-9.84,15.41-22.94,15.41-36.88V10.91c0-6.02-4.9-10.91-10.91-10.91Z"/>
+    <path fill="currentColor" d="M201.28.44h-43.78c-6.02,0-10.91,4.9-10.91,10.91v9.42h54.78c9.26,0,16.97,7.35,17.18,16.38.11,4.56-1.59,8.86-4.78,12.13-3.19,3.27-7.45,5.07-12,5.07h-44.74v.05c-5.57.49-9.96,5.18-9.96,10.87v57.25h20.33v-47.84h34.37c10.01,0,19.4-3.94,26.44-11.08,7.04-7.15,10.83-16.6,10.68-26.61-.31-20.15-17.18-36.54-37.61-36.54Z"/>
+    <path fill="currentColor" d="M627.81,61.99v49.2c0,6.02,4.9,10.91,10.91,10.91h4.83l78.28-.02v-20.33h-73.69v-30.32h73.69v-20.33l-83.11-.02c-6.02,0-10.91,4.9-10.91,10.91Z"/>
+    <path fill="currentColor" d="M710.92.44h-72.08c-6.02,0-10.91,4.9-10.91,10.91v9.42h93.9v-9.42c0-6.02-4.89-10.91-10.91-10.91Z"/>
+    <path fill="currentColor" d="M293.51.44h-.01c-4.32,0-8.12,2.57-9.92,6.71l-50.13,115.36h22.36l37.65-86.65,37.37,86.65h22.33L303.43,7.19c-1.79-4.15-5.59-6.74-9.92-6.74Z"/>
+    <path fill="currentColor" d="M421.28,0c-33.66,0-61.05,27.39-61.05,61.05s27.39,61.05,61.05,61.05c12.2,0,23.56-3.61,33.11-9.8l6.65,6.65c1.92,1.92,4.48,2.98,7.2,2.98s5.28-1.06,7.2-2.98c1.93-1.92,2.98-4.48,2.98-7.2s-1.06-5.28-2.99-7.2l-6.02-6.02c8.08-10.35,12.91-23.35,12.91-37.47,0-33.66-27.39-61.05-61.05-61.05ZM437.35,66.45c-1.92-1.93-4.48-2.98-7.2-2.98s-5.28,1.06-7.2,2.98c-3.97,3.97-3.97,10.43,0,14.41l16.55,16.55c-5.48,2.76-11.67,4.32-18.21,4.32-22.43,0-40.67-18.25-40.67-40.67s18.25-40.67,40.67-40.67,40.67,18.25,40.67,40.67c0,8.49-2.62,16.38-7.09,22.91l-17.51-17.51Z"/>
+  </svg>
+
+  <!-- ==================== Hero 首圖區塊 ==================== -->
+  <section class="hero-section" id="heroSection">
+    <div class="hero-placeholder-fallback"></div>
+    <div class="hero-background"></div>
+  </section>
+
+  <!-- ==================== 主內容區塊 (自帶白底，會遮住 Logo) ==================== -->
+  <main class="main-content">
+    <div class="container">
+
+      <!-- 分類區塊 -->
+      <!-- 分類區塊 -->
+      <section class="category-section">
+        <div class="category-track" id="categoryTrack">
+          
+          <!-- 分類 1：居家生活 -->
+          <div class="category-item active" data-category="household">
+            <div class="category-icon-box">
+              <!-- 請將 src 替換成你的數位時鐘去背圖檔路徑 -->
+              <img src="./images/category-01.png" alt="數位時鐘" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            </div>
+            <div class="category-title">居家生活<span class="sub-en">| household</span></div>
+          </div>
+          
+          <!-- 分類 2：生活五金 -->
+          <div class="category-item" data-category="hardware">
+            <div class="category-icon-box">
+              <!-- 請將 src 替換成你的掛鉤去背圖檔路徑 -->
+              <img src="./images/category-02.png" alt="門後掛鉤" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            </div>
+            <div class="category-title">生活五金<span class="sub-en">| general hardware</span></div>
+          </div>
+          
+          <!-- 分類 3：3C 電器 -->
+          <div class="category-item" data-category="electronics">
+            <div class="category-icon-box">
+              <!-- 請將 src 替換成你的延長線去背圖檔路徑 -->
+              <img src="./images/category-03.png" alt="延長線" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            </div>
+            <div class="category-title">數位家電<span class="sub-en">| 3C electronics</span></div>
+          </div>
+          
+          <!-- 分類 4：空間設備 -->
+          <div class="category-item" data-category="facilities">
+            <div class="category-icon-box">
+              <!-- 請將 src 替換成你的煙霧偵測器去背圖檔路徑 -->
+              <img src="./images/category-04.png" alt="煙霧偵測器" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            </div>
+            <div class="category-title">空間設備<span class="sub-en">| Spatial Facilities</span></div>
+          </div>
+
+          <!-- 黑線指示器 -->
+          <div class="category-active-line" id="categoryActiveLine"></div>
+        </div>
+      </section>
+
+      <!-- 商品列表網格 -->
+      <!-- 商品列表網格 -->
+      <section class="products-grid">
+        
+        <article class="product-card">
+          <div class="product-image-wrap">
+            <img src="./images/household_1.png" alt="極簡面紙盒" loading="lazy">
+          </div>
+          <div class="product-meta">
+            <span class="product-name">極簡面紙盒</span>
+            <span class="product-price">$550</span>
+          </div>
+        </article>
+
+        <a href="product.html" class="product-card">
+          <div class="product-image-wrap">
+            <img src="./images/household_2.png" alt="不鏽鋼鏡子" loading="lazy">
+          </div>
+          <div class="product-meta">
+            <span class="product-name">不鏽鋼鏡子</span>
+            <span class="product-price">$790</span>
+          </div>
+        </a>
+
+        <article class="product-card">
+          <div class="product-image-wrap">
+            <img src="./images/household_3.png" alt="白色畫框" loading="lazy">
+          </div>
+          <div class="product-meta">
+            <span class="product-name">白色畫框</span>
+            <span class="product-price">$350</span>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image-wrap">
+            <img src="./images/household_4.png" alt="數位時鐘" loading="lazy">
+          </div>
+          <div class="product-meta">
+            <span class="product-name">數位時鐘</span>
+            <span class="product-price">$890</span>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image-wrap">
+            <img src="./images/household_5.png" alt="白熊絨毛玩偶" loading="lazy">
+          </div>
+          <div class="product-meta">
+            <span class="product-name">白熊絨毛玩偶</span>
+            <span class="product-price">$880</span>
+          </div>
+        </article>
+
+      </section>
+    </div>
+  </main>
+
+<!-- ==================== 頁尾 Footer ==================== -->
+  <footer class="footer" style="background-color: #f4f5f7; padding: 80px 44px; border-top: 1px solid var(--color-border-light); font-size: 14px; color: #333333;">
+    <div class="footer-inner" style="max-width: 1140px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px;">
+      
+      <!-- 左側：品牌 Logo 與社群按鈕 -->
+      <div class="footer-brand" style="display: flex; flex-direction: column; gap: 40px;">
+        <!-- 點擊回到主頁 -->
+        <a href="#" class="footer-logo-link" aria-label="回到首頁" style="display: inline-block; transition: opacity 0.2s ease;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+          <svg class="footer-logo-svg" style="height: 28px; width: auto; color: #111;" viewBox="0 0 721.83 122.52" fill="currentColor">
+            <path fill="currentColor" d="M58.81.48C26.89,1.51,1.07,27.33.03,59.25c-.55,16.99,5.77,32.97,17.8,45,11.55,11.55,26.73,17.83,42.95,17.83.68,0,1.37-.01,2.05-.03,31.92-1.04,57.73-26.86,58.77-58.77.55-16.99-5.77-32.97-17.8-45C91.78,6.25,75.8-.03,58.81.48ZM89.43,89.88c-8.04,8.04-19.17,12.34-30.52,11.83-20.66-.95-37.59-17.88-38.54-38.54-.52-11.36,3.79-22.48,11.83-30.52,7.6-7.6,17.96-11.87,28.67-11.87.62,0,1.23.01,1.85.04,20.66.95,37.59,17.88,38.54,38.54.52,11.36-3.79,22.48-11.83,30.52Z"/>
+            <path fill="currentColor" d="M596.19,0h-9.42v70.15c0,8.51-3.35,16.51-9.44,22.5-6.08,5.99-14.12,9.28-22.65,9.09-17.15-.26-31.11-14.68-31.11-32.14V0h-9.42c-6.02,0-10.91,4.9-10.91,10.91v58.64c0,28.69,23.07,52.26,51.42,52.53.17,0,.35,0,.52,0,13.76,0,26.71-5.33,36.52-15.04,9.93-9.84,15.41-22.94,15.41-36.88V10.91c0-6.02-4.9-10.91-10.91-10.91Z"/>
+            <path fill="currentColor" d="M201.28.44h-43.78c-6.02,0-10.91,4.9-10.91,10.91v9.42h54.78c9.26,0,16.97,7.35,17.18,16.38.11,4.56-1.59,8.86-4.78,12.13-3.19,3.27-7.45,5.07-12,5.07h-44.74v.05c-5.57.49-9.96,5.18-9.96,10.87v57.25h20.33v-47.84h34.37c10.01,0,19.4-3.94,26.44-11.08,7.04-7.15,10.83-16.6,10.68-26.61-.31-20.15-17.18-36.54-37.61-36.54Z"/>
+            <path fill="currentColor" d="M627.81,61.99v49.2c0,6.02,4.9,10.91,10.91,10.91h4.83l78.28-.02v-20.33h-73.69v-30.32h73.69v-20.33l-83.11-.02c-6.02,0-10.91,4.9-10.91,10.91Z"/>
+            <path fill="currentColor" d="M710.92.44h-72.08c-6.02,0-10.91,4.9-10.91,10.91v9.42h93.9v-9.42c0-6.02-4.89-10.91-10.91-10.91Z"/>
+            <path fill="currentColor" d="M293.51.44h-.01c-4.32,0-8.12,2.57-9.92,6.71l-50.13,115.36h22.36l37.65-86.65,37.37,86.65h22.33L303.43,7.19c-1.79-4.15-5.59-6.74-9.92-6.74Z"/>
+            <path fill="currentColor" d="M421.28,0c-33.66,0-61.05,27.39-61.05,61.05s27.39,61.05,61.05,61.05c12.2,0,23.56-3.61,33.11-9.8l6.65,6.65c1.92,1.92,4.48,2.98,7.2,2.98s5.28-1.06,7.2-2.98c1.93-1.92,2.98-4.48,2.98-7.2s-1.06-5.28-2.99-7.2l-6.02-6.02c8.08-10.35,12.91-23.35,12.91-37.47,0-33.66-27.39-61.05-61.05-61.05ZM437.35,66.45c-1.92-1.93-4.48-2.98-7.2-2.98s-5.28,1.06-7.2,2.98c-3.97,3.97-3.97,10.43,0,14.41l16.55,16.55c-5.48,2.76-11.67,4.32-18.21,4.32-22.43,0-40.67-18.25-40.67-40.67s18.25-40.67,40.67-40.67,40.67,18.25,40.67,40.67c0,8.49-2.62,16.38-7.09,22.91l-17.51-17.51Z"/>
+          </svg>
+        </a>
+
+        <!-- 客製化 SVG 社群 Icon -->
+        <div class="social-icons" style="display: flex; gap: 20px;">
+          <a href="#" class="social-icon" aria-label="LINE" style="width: 32px; height: 32px; color: #999; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#999'">
+            <svg viewBox="0 0 260.39 248.07">
+              <path fill="currentColor" d="M249.91,64.16c-10.75-20.31-28.35-36.2-48.56-46.94C169.66.37,131.66-3.96,96.68,3.56,60.11,11.42,25.09,33.46,8.66,67.72c-11.54,24.07-11.52,51.75-.1,75.87,10.52,22.2,29.04,39.43,50.72,50.82,14.82,7.79,30.78,12.74,47.33,15.17,3.87.57,7.36,1.45,10.64,3.41,2.09,1.25,3.35,3.11,3.68,5.53.41,3,.37,5.96-.12,9l-2.24,13.99c-.25,1.58-.23,3.32.63,4.79,1.93,3.33,8.77,1.31,12.2-.57l14.6-8.01c24.26-14.56,51.22-33.55,72.16-52.55,5.96-5.41,11.29-10.96,16.56-17.03,6.85-7.88,12.77-16.26,17.28-25.7,12.05-25.16,10.9-53.72-2.09-78.29ZM84.19,136.87c0,1.44-1.05,2.41-2.5,2.41h-36.25c-1.68,0-2.71-1.08-2.71-2.76l.02-56.6c0-1.32,1.13-2.29,2.33-2.29h9.48c1.4,0,2.34,1.14,2.34,2.56v45.02s24.79,0,24.79,0c1.35,0,2.36.9,2.51,2.35l-.02,9.32ZM106.26,136.83c0,1.36-1.03,2.43-2.41,2.44h-9.33c-1.31.02-2.45-.99-2.45-2.44v-56.95c.01-1.43,1.3-2.37,2.5-2.37h9.3c1.42.16,2.39,1.1,2.39,2.66v56.66ZM169.08,136.53c0,1.55-1.08,2.58-2.53,2.58h-9.48c-.72-.07-1.23-.32-1.65-.94l-25.96-35-.05,33.83c0,1.67-1.14,2.6-2.53,2.6l-8.88.02c-1.44,0-2.69-.89-2.69-2.5v-56.64c-.03-1.65,1.18-2.6,2.7-2.57l10.47.04,26.45,35.65.04-33.44c0-1.53.98-2.57,2.47-2.66l9.27.05c1.45,0,2.37,1.13,2.37,2.63v56.36ZM217.13,139.29h-36.83c-1.33,0-2.28-1.13-2.28-2.45v-56.67c0-1.54,1.06-2.55,2.57-2.55h36.26c1.4,0,2.62.87,2.62,2.28l.03,9.37c0,1.43-1.18,2.53-2.63,2.48h-24.66s0,9.56,0,9.56l24.89.02c1.34,0,2.39,1.03,2.4,2.35v9.38c.01,1.3-.97,2.42-2.47,2.46h-24.82s0,9.58,0,9.58l24.89.02c1.34,0,2.39,1.04,2.4,2.35v9.39c.01,1.24-.99,2.42-2.36,2.42Z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Facebook" style="width: 32px; height: 32px; color: #999; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#999'">
+            <svg viewBox="0 0 265.91 264.2">
+              <path fill="currentColor" d="M138.01,0s.06.15.14.15l2.46.07c17.34,1.01,34.26,5.32,49.92,12.86,27.21,13.1,49.26,35.17,62.34,62.39,7.52,15.65,11.8,32.51,12.82,49.84l.08,4.94c0,.09.1.15.15.14v4.98s-.15.05-.15.14l-.08,5.06c-1.34,23.05-8.56,45.27-21.16,64.65-20.56,31.61-53.5,53.16-90.77,58.97v-92.83s30.97-.01,30.97-.01l5.88-38.42h-36.85s.02-25.78.02-25.78c.12-3.14.6-6.05,1.81-8.9,1.83-4.39,5.28-7.67,9.74-9.35,2.85-1.11,5.75-1.52,8.85-1.66h18.03s0-32.74,0-32.74c-9.09-1.41-18.04-2.35-27.16-2.56-5.35-.13-10.51.18-15.72,1.26-18.63,3.81-31.16,16.19-35.38,34.71-1.08,4.75-1.66,9.47-1.67,14.39l-.03,30.27c0,.16.01.23-.03.31-.03.06-.1.04-.26.04h-31.06s-1.98-.02-1.98-.02c-.12,0-.28,0-.33.05-.06.07-.1.15-.1.37v38.02s33.22,0,33.22,0c.21,0,.37-.04.49.02.08.04.06.21.06.45v92.1c.02.16,0,.21-.05.27-15.59-2.44-30.6-7.67-44.38-15.44-8.82-4.97-17.03-10.9-24.45-17.72l-.17-.15-.17-.15c-18.61-17.14-32.03-39.2-38.51-63.7l-2.33-10.54-1.08-7.13-.83-8.86v-.28s0-.28,0-.28v-.27s-.03-.24-.03-.24l-.06-.22c-.08-.32-.02-.59-.05-.93l-.02-.26c0-.11-.07-.14-.13-.14l.04-9.97.2-1.46c.87-17.64,5.17-34.88,12.81-50.84,10.07-21.01,25.49-39,44.65-52.21C77.73,9.59,101.06,1.63,125.33.23l2.59-.21,10.09-.02Z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Instagram" style="width: 32px; height: 32px; color: #999; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#999'">
+            <svg viewBox="0 0 248.29 248.21">
+              <path fill="currentColor" d="M248.29,55.3v134.56c-.1-.01-.24.09-.24.26l-.13,6.33c-.63,5.64-1.62,11-3.55,16.29-5.85,16.01-18.79,27.98-35.18,32.63-4.68,1.33-9.31,2.02-14.17,2.45l-3.61.11c-.32,0-.65.07-.72.28H59.37c-1.63-.52-3.38-.12-5.14-.33-4.5-.53-8.79-.92-13.17-1.98-17.42-4.23-31.37-16.81-37.3-33.75-1.66-4.74-2.42-9.61-3.09-14.63l-.67-4.99L.1,57.69c0-5.97,1-11.86,2.42-17.56C6.29,25.01,16.72,12.48,30.75,5.88c4-1.88,7.89-3.38,12.28-4.11C47.19,1.08,51.43,0,55.8,0h134.22c5.34,0,10.5.84,15.66,1.89,13.62,2.78,25.65,10.89,33.24,22.5,4.51,6.91,7.34,14.53,8.36,22.65l.78,6.26c.09.68-.27,1.49.23,1.99ZM167.36,215.35c7.21-.61,13.84-2.24,20.26-5.19,5.61-2.58,10.33-6.1,14.53-10.59,4.74-5.06,8.16-10.88,10.33-17.49,1.86-5.66,3.01-11.33,3.26-17.31l.52-12.67.2-28.9-.25-29.62c-.11-13.04-1.48-26.4-8.36-37.6-8.89-14.47-23.48-21.66-40.22-23.16-9.27-.83-18.26-.94-27.59-.94h-31.77c-9.33,0-18.33.12-27.59.94-7.8.7-15.23,2.59-22.17,6.26-8.55,4.53-15.55,11.64-19.87,20.29-3.45,6.92-5.25,14.25-5.86,21.99-.81,10.26-.93,20.23-.9,30.54l.08,34.74c.02,7.07.25,13.8.89,20.78,1.18,12.92,5.58,24.65,14.94,33.75,3.9,3.8,8.11,6.78,13.1,9.04,6.47,2.94,13.23,4.59,20.38,5.16,8.98.71,17.71.85,26.76.85l32.02.02c9.21,0,18.05-.12,27.32-.9Z"/>
+              <path fill="currentColor" d="M165.05,198.84l-19.04.74-43.7.02-11.69-.3c-8.6-.22-18.27-1.24-25.63-5.66-9.33-5.61-14.05-14.82-15.36-25.53-.82-6.69-1.03-13.16-1.05-19.96l-.11-36.72c-.03-9.79.08-19.27.86-28.97.94-11.85,5.56-22.02,15.89-28.19,6.51-3.89,15.05-5.23,22.68-5.42l17.88-.43,34.98-.02c8.68,0,17.06.14,25.64.93,4.11.38,7.92,1.27,11.75,2.61,8.68,3.04,15.53,10.28,18.5,19.01,1.48,4.36,2.37,8.71,2.51,13.34l.62,19.45.07,31.77c.02,9.81-.14,19.3-.75,29.04-.31,5.08-1.36,9.8-3.17,14.47-1.41,3.65-3.49,6.67-6.16,9.48-3.49,3.67-7.6,6.28-12.45,7.91-3.98,1.34-7.94,2.28-12.3,2.45ZM184.49,74.8c0-6.09-4.94-11.03-11.03-11.03s-11.03,4.94-11.03,11.03,4.94,11.03,11.03,11.03,11.03-4.94,11.03-11.03ZM171.52,124.08c0-26.16-21.2-47.36-47.36-47.36s-47.36,21.2-47.36,47.36,21.2,47.36,47.36,47.36,47.36-21.2,47.36-47.36Z"/>
+              <circle fill="currentColor" cx="124.17" cy="124.05" r="30.79"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <!-- 右側：網站連結 -->
+      <div class="footer-links-row" style="display: flex; gap: 80px;">
+        <div class="footer-links-col" style="display: flex; flex-direction: column; gap: 18px;">
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">最新情報</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">品牌服務</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">品牌活動</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">活動特輯</a>
+        </div>
+        <div class="footer-links-col" style="display: flex; flex-direction: column; gap: 18px;">
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">最新情報</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">品牌服務</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">品牌活動</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">活動特輯</a>
+        </div>
+        <div class="footer-links-col" style="display: flex; flex-direction: column; gap: 18px;">
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">最新情報</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">品牌服務</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">品牌活動</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">活動特輯</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== 回頂端按鈕 ==================== -->
+  <button class="back-to-top" id="backToTop" aria-label="返回頁面頂端">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- 引入外部 JavaScript -->
+  <script src="script.js"></script>
+  <script>
+    /* Custom Cursor：預設黑色；只有加入購物車 / 討論區 hover 變紅；進入討論區後永遠紅色 + glow（見 CSS 的 body.hacked） */
+    (function () {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;   // 手機/觸控不啟用
+      const dot = document.createElement('div');
+      dot.className = 'custom-cursor';
+      dot.innerHTML = '<span>VIEW</span>';
+      document.body.appendChild(dot);
+      document.documentElement.classList.add('has-cursor');
+      const RED_TARGETS = '.btn-add-cart, #discussionSection';
+      const CLICKABLE = 'a, button, input, select, textarea, label, summary, [role="button"], [onclick], .nav-menu-btn, .category-item, .product-card, .thumb-item, .accordion-item, .play-btn, .discussion-section';
+      const isClickable = (t) => {
+        const c = t.closest && t.closest(CLICKABLE);
+        if (c && c.matches('.discussion-section') && document.body.classList.contains('hacked')) return false;   // 進入討論區後它不再是可點擊區域
+        return !!c;
+      };
+      document.addEventListener('mousemove', (e) => {
+        dot.style.translate = (e.clientX - 8) + 'px ' + (e.clientY - 8) + 'px';   // 位置用 translate、縮放用 scale，兩者分開，縮放才不會把位置一起縮偏
+        dot.classList.add('visible');
+        dot.classList.toggle('is-red', !!(e.target.closest && e.target.closest(RED_TARGETS)));
+        const inView = !!(e.target.closest && e.target.closest('.product-image-wrap'));
+        dot.classList.toggle('is-view', inView);
+        dot.classList.toggle('is-small', !inView && isClickable(e.target));
+      }, { passive: true });
+      document.documentElement.addEventListener('mouseleave', () => { dot.classList.remove('visible', 'is-red', 'is-small', 'is-view'); });
+    })();
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    /* ==========================================================================
+       OPAQUE 標準字進場動畫（每次載入都播放）
+       只動畫 #brandLogo 裡面的 path；Logo 本身的位置/縮放仍由 script.js 控制
+       ========================================================================== */
+    (function () {
+      const html = document.documentElement;
+      const body = document.body;
+      const logo = document.getElementById('brandLogo');
+      if (!logo || !html.classList.contains('intro-playing')) return;   // 減少動態效果：直接略過
+
+      /* ---------- 捲動鎖定：overflow + 攔截滾輪 / 觸控 / 鍵盤 ---------- */
+      body.classList.add('intro-playing');
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);                                            // 一定從第一屏開始
+      const stop = (e) => e.preventDefault();
+      const stopKeys = (e) => {
+        if ([' ', 'PageUp', 'PageDown', 'Home', 'End', 'ArrowUp', 'ArrowDown'].includes(e.key)) e.preventDefault();
+      };
+      window.addEventListener('wheel', stop, { passive: false });
+      window.addEventListener('touchmove', stop, { passive: false });
+      window.addEventListener('keydown', stopKeys);
+
+      const paths = Array.from(logo.querySelectorAll('path'));
+      const SVGNS = 'http://www.w3.org/2000/svg';
+      let done = false;
+
+      const unlock = () => {
+        if (done) return; done = true;
+        paths.forEach((el) => { el.removeAttribute('filter'); if (typeof gsap !== 'undefined') gsap.set(el, { clearProps: 'all' }); });
+        const defs = logo.querySelector('#introDefs'); if (defs) defs.remove();
+        logo.style.removeProperty('overflow');
+        html.classList.remove('intro-playing');                         // 先移除隱藏用的 class，再清掉 inline 樣式，同一幀內完成
+        paths.forEach((el) => el.style.removeProperty('opacity'));
+        body.classList.remove('intro-playing');
+        window.removeEventListener('wheel', stop);
+        window.removeEventListener('touchmove', stop);
+        window.removeEventListener('keydown', stopKeys);
+      };
+
+      /* 保險：GSAP 載入失敗時不要卡住使用者 */
+      if (typeof gsap === 'undefined') { unlock(); return; }
+      setTimeout(unlock, 4500);                                         // 保險：最晚 4.5 秒一定解鎖
+
+      /* ---------- 依 path 的水平位置分組（E 由兩塊組成，會歸在同一組）---------- */
+      const items = paths.map((el) => { const b = el.getBBox(); return { el, x: b.x }; }).sort((a, b) => a.x - b.x);
+      const groups = [];
+      items.forEach((it) => {
+        const g = groups[groups.length - 1];
+        if (g && Math.abs(g.x - it.x) < 20) g.els.push(it.el); else groups.push({ x: it.x, els: [it.el] });
+      });
+
+      /* ---------- 為每組建立橫向模糊濾鏡（SVG filter，Safari 也支援）---------- */
+      logo.style.overflow = 'visible';                                  // 模糊與位移不會被 SVG 邊界裁掉
+      const defs = document.createElementNS(SVGNS, 'defs');
+      defs.id = 'introDefs';
+      logo.insertBefore(defs, logo.firstChild);
+      groups.forEach((g, i) => {
+        const f = document.createElementNS(SVGNS, 'filter');
+        f.id = 'introBlur' + i;
+        ['x:-60%', 'y:-80%', 'width:220%', 'height:260%'].forEach((kv) => { const [k, v] = kv.split(':'); f.setAttribute(k, v); });
+        const blur = document.createElementNS(SVGNS, 'feGaussianBlur');
+        blur.setAttribute('stdDeviation', '0 0');
+        f.appendChild(blur); defs.appendChild(f);
+        g.blur = blur;
+        g.v = { bx: 22, by: 2.5 };                                      // 起始：橫向拖影式模糊
+        g.els.forEach((el) => el.setAttribute('filter', 'url(#introBlur' + i + ')'));
+        blur.setAttribute('stdDeviation', g.v.bx + ' ' + g.v.by);
+      });
+
+      /* ---------- Timeline ---------- */
+      const tl = gsap.timeline({ defaults: { overwrite: 'auto' } });
+      groups.forEach((g, i) => {
+        const t = 0.05 + i * 0.15;                                      // 由左到右依序出現
+        const dir = i % 2 ? 1 : -1;                                     // 相鄰字母左右小幅錯位
+        gsap.set(g.els, { opacity: 0, x: -14 + dir * 6 });
+        tl.to(g.els, { opacity: 1, duration: 0.55, ease: 'power1.out' }, t)
+          .to(g.els, { x: 0, duration: 0.95, ease: 'power3.out' }, t)
+          .to(g.v, {
+            bx: 0, by: 0, duration: 0.95, ease: 'power2.out',
+            onUpdate: () => g.blur.setAttribute('stdDeviation', g.v.bx.toFixed(2) + ' ' + g.v.by.toFixed(2))
+          }, t);
+      });
+      tl.call(unlock);                                                  // 動畫一跑完就立刻解鎖，馬上可以往下滑
+    })();
+  </script>
+</body>
+</html>

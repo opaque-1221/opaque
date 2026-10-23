@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>不鏽鋼鏡子 - OPAQUE | 極簡質感生活選物</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.typekit.net/phq1gwu.css">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ==========================================================================
+       全域與導覽列
+       ========================================================================== */
+    body {
+      background-color: var(--color-white);
+      color: var(--color-text-dark);
+      padding-top: calc(var(--navbar-height) + 48px);
+    }
+
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%; height: var(--navbar-height);
+      background-color: var(--color-white); color: var(--color-text-dark);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 44px; z-index: 1000;
+    }
+    .nav-left { flex: 1; display: flex; justify-content: flex-start; }
+    .nav-actions { flex: 1; display: flex; justify-content: flex-end; gap: 24px; }
+    .nav-center-slot { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; }
+    .nav-center-slot a, .nav-center-slot svg { display: block; }
+    .nav-center-slot { padding-top: 1px; }
+    .nav-menu-btn { display: flex; flex-direction: column; gap: 5px; width: 36px; cursor: pointer; }
+    .nav-menu-btn span { display: block; width: 24px; height: 2px; background-color: currentColor; }
+    .nav-icon-btn { position: relative; }
+    .nav-icon-btn svg { width: 22px; height: 22px; stroke-width: 1.7; stroke: currentColor; fill: none; transition: 0.2s; }
+    .nav-icon-btn:hover svg { opacity: 0.7; transform: translateY(-1px); }
+
+    /* ==========================================================================
+       商品圖與購買資訊（依設計稿 1080px 內容寬度排版）
+       ========================================================================== */
+    .pdp-container { max-width: 1144px; margin: 0 auto; padding: 0 32px; }
+
+    .product-top-area {
+      display: grid;
+      grid-template-columns: 1fr 342px;
+      grid-template-rows: auto auto;
+      column-gap: 76px;
+      padding-left: 9px;
+      margin-bottom: 26px;
+    }
+
+    /* 左：主圖 + 縮圖 */
+    .gallery-wrapper { grid-column: 1; grid-row: 1; display: flex; gap: 22px; align-items: stretch; padding-right: 2px; }
+    .main-image { flex: 1; aspect-ratio: 516 / 514; background-color: #f7f7f7; overflow: hidden; }
+    .main-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .thumbnail-list { width: 113px; display: flex; flex-direction: column; justify-content: space-between; }
+    .thumb-item { width: 113px; height: 113px; background-color: #f7f7f7; cursor: pointer; transition: opacity 0.2s; }
+    .thumb-item:hover { opacity: 0.7; }
+    .thumb-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .short-desc { grid-column: 1; grid-row: 2; font-size: 18px; font-weight: 300; line-height: 27px; letter-spacing: 0.1em; margin-top: 55px; }
+    .short-desc .gray-text { color: #8b8b8b; margin-top: 16px; display: block; }
+
+    /* 右：購買資訊 */
+    .product-info-panel { grid-column: 2; grid-row: 1; display: flex; flex-direction: column; height: 100%; padding-top: 13px; }
+    .brand-name { font-family: var(--font-brand); font-size: 24px; font-weight: 400; letter-spacing: 0.06em; line-height: 1.2; margin-bottom: 9px; }
+    .product-title { font-size: 40px; font-weight: 300; line-height: 52px; letter-spacing: 0.05em; margin-bottom: 24px; }
+    .product-price { font-family: var(--font-brand); font-size: 68px; font-weight: 200; line-height: 74px; letter-spacing: 0.02em; margin-bottom: 99px; }
+
+    .sales-info { font-size: 18px; font-weight: 300; line-height: 27px; letter-spacing: 0.08em; color: #8b8b8b; margin-bottom: 15px; }
+    .reviews-mini { display: flex; align-items: center; font-size: 18px; font-weight: 300; line-height: 27px; color: #111; margin-bottom: 15px; }
+    .stars { display: flex; gap: 4px; margin-right: 12px; }
+    .stars svg { width: 18px; height: 18px; fill: #111; }
+    .stars svg[fill="#e5e5e5"] { fill: #d4d4d4; }
+    .reviews-mini .score { font-weight: 400; letter-spacing: 0.05em; }
+    .reviews-mini .count { margin-left: 34px; color: #111; letter-spacing: 0.05em; }
+    .shipping-info { font-size: 18px; font-weight: 300; line-height: 27px; letter-spacing: 0.05em; color: #8b8b8b; }
+
+    .action-group { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+    .btn-add-cart { flex: 0 0 252px; height: 78px; border: 1px solid var(--color-black); border-radius: 40px; font-size: 29px; font-weight: 300; letter-spacing: 0.1em; transition: 0.2s; }
+    .btn-add-cart:hover { background-color: var(--color-black); color: var(--color-white); }
+    .btn-wishlist { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; color: #111; transition: 0.2s; border: none; }
+    .btn-wishlist svg { width: 44px; height: auto; overflow: visible; display: block; }
+    .btn-wishlist svg path { fill: transparent; stroke: #111; stroke-width: 1; stroke-miterlimit: 10; transition: fill 0.25s ease; }
+    .btn-wishlist:hover { transform: scale(1.08); }
+    .btn-wishlist.active svg path { fill: #111; }
+    .btn-wishlist.pop svg { animation: heartPop 0.45s cubic-bezier(0.2, 1.6, 0.4, 1); }
+    @keyframes heartPop { 0% { transform: scale(0.75); } 50% { transform: scale(1.28); } 100% { transform: scale(1); } }
+    .btn-add-cart:active { transform: scale(0.97); }
+
+    /* 加入購物車：商品圖飛向購物車 */
+    .fly-img { position: fixed; z-index: 2000; object-fit: cover; pointer-events: none; transform-origin: center center; will-change: transform, opacity; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18); border-radius: 4px; }
+    .cart-badge { position: absolute; top: -2px; right: -4px; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 9px; background: #111; color: #fff; font-family: var(--font-brand); font-size: 10px; font-weight: 500; line-height: 17px; text-align: center; }
+    .cart-badge.pop { animation: badgePop 0.4s cubic-bezier(0.2, 1.6, 0.4, 1); }
+    @keyframes badgePop { 0% { transform: scale(0.4); } 100% { transform: scale(1); } }
+    .nav-icon-btn.bump svg { animation: cartBump 0.42s ease; }
+    @keyframes cartBump { 0% { transform: scale(1); } 35% { transform: scale(1.32) rotate(-6deg); } 70% { transform: scale(0.94); } 100% { transform: scale(1); } }
+
+    /* 折疊選單 */
+    .product-top-area + .accordion-item { border-top: 1px solid #000; }
+    .accordion-item { height: 139px; border-bottom: 1px solid #000; display: flex; justify-content: space-between; align-items: center; padding: 0 31px 0 11px; cursor: pointer; transition: 0.2s; }
+    .accordion-item:hover { opacity: 0.7; }
+    .acc-title { font-size: 32px; font-weight: 300; line-height: 41px; letter-spacing: 0.05em; }
+    .acc-en { font-family: var(--font-brand); font-size: 22px; font-weight: 300; line-height: 29px; letter-spacing: 0.05em; margin-top: 4px; display: block; }
+
+    /* ==========================================================================
+       評價區塊
+       ========================================================================== */
+    .reviews-header { display: flex; justify-content: space-between; align-items: baseline; padding: 34px 34px 0 11px; margin-bottom: 23px; }
+    .reviews-header .title { display: block; font-size: 32px; font-weight: 300; line-height: 41px; letter-spacing: 0.05em; }
+    .reviews-header .en { font-family: var(--font-brand); font-size: 22px; font-weight: 300; line-height: 29px; letter-spacing: 0.05em; margin-top: 4px; display: block; }
+    .reviews-header .count { font-size: 26px; font-weight: 300; letter-spacing: 0.05em; color: #8b8b8b; }
+
+    .review-list { display: flex; flex-direction: column; }
+    .review-item { display: flex; gap: 29px; padding: 36px 0 27px 11px; border-bottom: 1px solid #9b9b9b; }
+    .review-avatar { width: 58px; height: 58px; border-radius: 50%; background-color: #f7f7f7; border: 1px solid #e3e3e3; display: flex; align-items: center; justify-content: center; color: #bbb; flex-shrink: 0; margin-top: -9px; }
+    .review-avatar svg { width: 36px; height: 36px; }
+    .review-content { flex: 1; }
+    .review-name { font-size: 18px; font-family: var(--font-brand); font-weight: 400; line-height: 22px; }
+    .review-stars { display: flex; gap: 3px; margin: 2px 0 21px; }
+    .review-stars svg { width: 17px; height: 17px; fill: #111; }
+    .review-stars svg[fill="#e5e5e5"] { fill: #d4d4d4; }
+    .review-title { font-size: 19px; font-weight: 500; line-height: 27px; letter-spacing: 0.04em; margin-bottom: 21px; color: #111; }
+    .review-text { font-size: 18px; font-weight: 300; line-height: 23px; letter-spacing: 0.1em; color: #222; }
+
+    .see-more-link { display: block; font-size: 22px; font-weight: 300; line-height: 29px; letter-spacing: 0.05em; padding: 23px 0 0 11px; margin-bottom: 61px; }
+    .see-more-link:hover { opacity: 0.6; }
+
+    /* ==========================================================================
+       討論區板塊
+       ========================================================================== */
+    .discussion-section { border: 1px solid #000; border-radius: 47px 47px 40px 40px; margin: 0 -35px 72px; }
+    .disc-header { height: 141px; padding: 37px 0 0 47px; border-bottom: 1px solid #000; }
+    .disc-header .title { font-size: 32px; font-weight: 300; line-height: 41px; letter-spacing: 0.05em; }
+    .disc-header .en { font-family: var(--font-brand); font-size: 22px; font-weight: 300; line-height: 29px; letter-spacing: 0.05em; margin-top: 4px; display: block; }
+
+    .disc-body { padding: 48px 31px 39px 47px; }
+    .disc-author-row { display: flex; align-items: center; margin-bottom: 32px; width: 787px; max-width: 100%; }
+    .author-info { display: flex; align-items: center; gap: 28px; flex: 1; }
+    .author-info .review-avatar { margin-top: 0; }
+    .author-info .name { font-size: 18px; font-weight: 400; line-height: 26px; letter-spacing: 0.04em; }
+    .author-info .post-title { font-size: 19px; font-weight: 400; line-height: 28px; letter-spacing: 0.04em; }
+    .post-title .hang { margin-left: -0.55em; }
+    .tags { font-size: 18px; font-weight: 300; color: #8b8b8b; letter-spacing: 0.1em; white-space: nowrap; align-self: flex-end; }
+
+    .disc-media-row { display: flex; align-items: flex-start; gap: 32px; padding-left: 72px; }
+
+    /* 影片區 */
+    .video-section { width: 715px; flex: 0 0 715px; display: flex; flex-direction: column; }
+    .video-box { position: relative; width: 100%; height: 468px; border-radius: 26px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #4b3327; }
+    .video-box { background: #86837e; }
+    .video-blur-bg {
+      position: absolute; inset: -60px; z-index: 1; filter: blur(34px) sepia(0.12) saturate(1.05);
+      background: url("./images/household_2_video_blur.jpg") center / cover no-repeat;   /* 直接用影片畫面模糊，色彩分布最自然 */
+      animation: videoDrift 4.2s ease-in-out infinite alternate;
+    }
+    /* 四團邊緣很柔的光斑在畫面裡游動：淺膚色、暖棕、深色陰影、亮部 */
+    .video-blur-bg::before, .video-blur-bg::after, .video-box::before, .video-box::after {
+      content: ''; position: absolute; border-radius: 50%; pointer-events: none; filter: blur(30px);
+    }
+    .video-blur-bg::before {
+      width: 70%; height: 80%; left: -10%; top: -5%;
+      background: radial-gradient(circle, rgba(226,186,158,0.28) 0%, rgba(226,186,158,0.15) 30%, rgba(226,186,158,0.05) 60%, rgba(226,186,158,0) 100%);
+      animation: blobA 2.4s ease-in-out infinite alternate;
+    }
+    .video-blur-bg::after {
+      width: 65%; height: 75%; right: -10%; bottom: -10%;
+      background: radial-gradient(circle, rgba(214,172,146,0.24) 0%, rgba(214,172,146,0.13) 30%, rgba(214,172,146,0.05) 62%, rgba(214,172,146,0) 100%);
+      animation: blobB 2s ease-in-out infinite alternate;
+    }
+    .video-box::before {
+      z-index: 1; width: 60%; height: 85%; left: 20%; top: 10%;
+      background: radial-gradient(circle, rgba(60,50,44,0.35) 0%, rgba(60,50,44,0.2) 30%, rgba(60,50,44,0.07) 62%, rgba(60,50,44,0) 100%);
+      animation: blobC 1.8s ease-in-out infinite alternate;
+    }
+    .video-box::after {
+      z-index: 1; width: 45%; height: 55%; right: 5%; top: 5%;
+      background: radial-gradient(circle, rgba(236,206,184,0.22) 0%, rgba(236,206,184,0.12) 32%, rgba(236,206,184,0.04) 62%, rgba(236,206,184,0) 100%);
+      animation: blobD 1.6s ease-in-out infinite alternate;
+    }
+    @keyframes videoDrift { 0% { transform: scale(1.1) translate(-4%, 3%) rotate(0deg); } 100% { transform: scale(1.22) translate(5%, -4%) rotate(5deg); } }
+    @keyframes blobA { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(90%, 55%) scale(1.15); } }
+    @keyframes blobB { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-95%, -50%) scale(1.2); } }
+    @keyframes blobC { 0% { transform: translate(-55%, 25%) scale(0.95); } 100% { transform: translate(60%, -20%) scale(1.2); } }
+    @keyframes blobD { 0% { transform: translate(-90%, 70%) scale(1); } 100% { transform: translate(15%, 10%) scale(1.25); } }
+
+    .video-vignette { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: radial-gradient(ellipse 74% 88% at 50% 50%, rgba(0,0,0,0) 55%, rgba(34,31,28,0.4) 85%, rgba(30,28,26,0.75) 100%); }
+    .main-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 3; opacity: 0; pointer-events: none; background: #000; transition: opacity 0.15s linear; }
+    .video-box.is-playing .main-video { opacity: 1; }
+    .video-box.is-playing .play-btn { display: none; }
+    .play-btn { position: relative; z-index: 4; width: 64px; height: 72px; cursor: pointer; transition: 0.2s; }
+    .play-btn svg { width: 100%; height: 100%; display: block; }
+    .play-btn:hover { transform: scale(1.08); }
+    body.hacked .play-btn svg path { fill: #000; opacity: 0.5; }   /* 進入討論區後，播放鍵變成半透明黑色 */
+
+    /* 即時數據 */
+    .video-stats { display: flex; flex-wrap: wrap; gap: 10px 36px; font-size: 18px; font-weight: 300; letter-spacing: 0.04em; color: #111; padding: 28px 0 0 21px; }
+    .video-stats div { display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+    .video-stats svg { height: 26px; width: auto; fill: currentColor; }
+
+    /* 跳動留言區：高度與影片一致，只露出約 6 則 */
+    .comments-marquee-box { flex: 1; height: 468px; position: relative; overflow-y: clip; overflow-x: visible; min-width: 252px; }
+    .comments-track { display: flex; flex-direction: column; padding-top: 26px; }
+    .chat-bubble {
+      /* 預設圖（JS 會依文字長度換成最合適的 6 種尺寸之一） */
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg id='_圖層_1' data-name='圖層 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 163.01 52.91' preserveAspectRatio='none'%3E%3Cpath vector-effect='non-scaling-stroke' fill='%23fff' stroke='%23000' stroke-miterlimit='10' d='M139.35.5H26.44C13.65.5,3.28,10.87,3.28,23.66h0c0,4.26,1.16,8.25,3.16,11.68L.86,51.92l15.2-7.57c3.12,1.57,6.65,2.46,10.38,2.46h112.91c12.79,0,23.16-10.37,23.16-23.16h0c0-12.79-10.37-23.16-23.16-23.16Z'/%3E%3C/svg%3E");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      width: fit-content;
+      height: 54px;
+      padding: 0 24px 7px 28px;
+      display: flex; align-items: center; justify-content: flex-start;
+      font-size: 18px; font-weight: 300; letter-spacing: 0.03em; white-space: nowrap; color: #111;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+    /* 被彈出去的那一則：邊彈邊淡出，避免上緣漏出半截 */
+    .chat-bubble.leaving { opacity: 0; transition: opacity 0.15s ease-out; }
+    .chat-bubble.enter { animation: bubbleIn 190ms cubic-bezier(0.2, 0.6, 0.35, 1) both; }
+    @keyframes bubbleIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+    /* 數字滾動（Odometer） */
+    .odo { display: inline-flex; height: 1.5em; line-height: 1.5; overflow: hidden; letter-spacing: 0; }
+    .odo-digit { display: block; width: calc(1ch + 0.04em); height: 1.5em; overflow: hidden; text-align: center; }
+    .odo-strip { display: flex; flex-direction: column; transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1); will-change: transform; }
+    .odo-strip span { display: block; height: 1.5em; }
+
+    .disc-footer { height: 94px; display: flex; align-items: center; padding: 0 0 0 47px; border-top: 1px solid #000; }
+    .disc-footer .see-more-link { margin: 0; padding: 0; }
+
+    /* ==========================================================================
+       手機版
+       ========================================================================== */
+    @media (max-width: 1100px) {
+      .acc-title, .reviews-header .title, .disc-header .title { font-size: 26px; }
+      .acc-en, .reviews-header .en, .disc-header .en { font-size: 18px; }
+      .product-title { font-size: 32px; }
+      .product-price { font-size: 52px; margin-bottom: 60px; }
+      .disc-media-row { padding-left: 0; }
+      .video-section { width: 55%; flex: 0 0 55%; }
+      .video-box, .comments-marquee-box { height: 380px; }
+      .discussion-section { margin: 0 0 60px; }
+    }
+    @media (max-width: 820px) {
+      .pdp-container { padding: 0 20px; }
+      .product-top-area { display: flex; flex-direction: column; gap: 32px; padding-left: 0; }
+      .product-info-panel { height: auto; }
+      .action-group { margin-top: 40px; }
+      .btn-add-cart { height: 56px; font-size: 20px; flex: 1; margin-right: 16px; }
+      .gallery-wrapper { gap: 10px; padding-right: 0; }
+      .thumbnail-list { width: 56px; gap: 8px; justify-content: flex-start; }
+      .thumb-item { width: 56px; height: 56px; }
+      .navbar { padding: 0 16px; }
+      .nav-actions { gap: 2px; }
+      .nav-icon-btn { width: 30px; height: 30px; }
+      .nav-icon-btn svg { width: 20px; height: 20px; }
+      .product-price { font-size: 44px; margin-bottom: 40px; }
+      .short-desc { margin-top: 0; }
+      .accordion-item { height: 100px; padding: 0 8px; }
+      .reviews-header { padding: 28px 8px 0; }
+      .review-item { padding-left: 0; }
+      .disc-header { padding-left: 24px; height: auto; padding-bottom: 20px; }
+      .disc-body { padding: 24px; }
+      .disc-author-row { flex-wrap: wrap; width: 100%; }
+      .disc-media-row { flex-direction: column; }
+      .video-section, .comments-marquee-box { width: 100%; flex: none; }
+      .video-box { height: 240px; }
+      .comments-marquee-box { height: 300px; }
+      .disc-footer { padding-left: 24px; }
+    }
+
+    /* ==========================================================================
+       點進討論區後：黑底、紅線、淡淡的掃描感（克制版，依參考圖）
+       ========================================================================== */
+    :root { --main-red: #c8161d; --main-red-95: rgba(200,22,29,0.95); --main-red-70: rgba(200,22,29,0.7); --main-red-45: rgba(200,22,29,0.45); --main-red-20: rgba(200,22,29,0.2); }
+    /* overflow 保持 visible：PRIVATE 可以超出右側框線 */
+    .discussion-section { position: relative; cursor: pointer; container-type: inline-size; }
+    body.hacked .discussion-section { cursor: default; }
+
+    /* 背景干擾層：從 Header 下緣開始，Header 不受任何干擾 */
+    .glitch-canvas { position: fixed; left: 0; top: var(--navbar-height); width: 100vw; height: calc(100vh - var(--navbar-height)); z-index: 1500; pointer-events: none; }
+    body.glitching::before, body.hacked::before { content: ''; position: fixed; left: 0; right: 0; top: var(--navbar-height); bottom: 0; z-index: 1400; pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(200,22,29,0.05) 3px, rgba(0,0,0,0) 4px); }
+    body.hacked::before { background:
+        repeating-linear-gradient(0deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(200,22,29,0.05) 3px, rgba(0,0,0,0) 4px),
+        radial-gradient(ellipse at center, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4) 100%); }
+
+    /* ② 切片錯位層：偶爾把一條水平區域短暫錯位（內容是頁面的暫時副本，約 50~150ms 後消失） */
+    .slice-layer { position: fixed; left: 0; right: 0; top: var(--navbar-height); bottom: 0; z-index: 1390; pointer-events: none; overflow: hidden; }
+    .slice-layer .slice { position: absolute; left: 0; width: 100%; overflow: hidden; visibility: hidden; contain: layout paint;
+      box-shadow: inset 0 1px 0 rgba(200, 22, 29, 0.35), inset 0 -1px 0 rgba(200, 22, 29, 0.35); }
+    .slice-layer .slice-inner { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+    .slice-layer .slice * { animation: none !important; transition: none !important; }
+    .slice-layer .slice *::before, .slice-layer .slice *::after { animation: none !important; }
+
+    /* 討論區專屬英文：全部放在 .discussion-section 裡面（絕對定位），滑離討論區就看不到 */
+    .glitch-text, .glitch-big, .glitch-big-sub, .glitch-member-only { display: none; position: absolute; pointer-events: none; }
+    body.hacked .glitch-text, body.hacked .glitch-member-only { display: block; }
+    body.private-on .glitch-big, body.private-on .glitch-big-sub { display: block; }
+
+    /* 系統小字（右下角那組）＝所有 microcopy 共用的同一套字體設定 */
+    .glitch-text, .glitch-big-sub, .glitch-member-only { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, 'Roboto Mono', monospace; font-weight: 600; font-style: normal; color: var(--main-red); letter-spacing: 0.02em; }
+    .glitch-text { z-index: 3; font-size: clamp(9px, 1.05cqw, 13px); line-height: 1.5; }
+    .gt-top { top: 4.4cqw; left: 40cqw; }
+    .gt-bottom { right: 2.2cqw; bottom: 1.6cqw; }
+    .gt-bottom .live-dot { display: inline-block; width: 0.8em; height: 0.8em; border-radius: 50%; background: var(--main-red); margin-right: 0.6em; animation: livePulse 2.4s ease-in-out infinite; }
+    @keyframes livePulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+
+    /* PRIVATE：巨大的訊號大字，貼右上角，被 CRT 掃描線橫向穿過 */
+    .glitch-big { font-family: "roboto-condensed", sans-serif; font-style: normal; font-weight: 500; text-transform: uppercase;
+      z-index: 2; right: -1.6cqw; top: -0.6cqw; font-size: 12cqw; line-height: 1; letter-spacing: -0.01em; color: var(--main-red-95);
+      text-shadow: 0.35cqw 0 0.8cqw rgba(200,22,29,0.55), -0.2cqw 0 1.4cqw rgba(200,22,29,0.3), 0 0 2.2cqw rgba(200,22,29,0.25);
+      -webkit-mask-image: repeating-linear-gradient(0deg, #000 0, #000 3px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px, #000 4px, #000 8px, rgba(0,0,0,0.35) 8px, rgba(0,0,0,0.35) 9px);
+              mask-image: repeating-linear-gradient(0deg, #000 0, #000 3px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px, #000 4px, #000 8px, rgba(0,0,0,0.35) 8px, rgba(0,0,0,0.35) 9px); }
+    /* member access only：和右下角小字同一套字體，只是放大一點，壓在 PRIVATE 下緣偏右 */
+    .glitch-big-sub { font-weight: 400; z-index: 3; right: 2.6cqw; top: 10cqw; font-size: clamp(11px, 1.9cqw, 24px); line-height: 1; }
+    /* 左下角 member only：角落系統標記 */
+    .glitch-member-only { z-index: 2; left: 2.2cqw; bottom: 1.6cqw; font-size: clamp(13px, 1.8cqw, 24px); line-height: 1.5;
+      -webkit-mask-image: repeating-linear-gradient(0deg, #000 0, #000 2px, rgba(0,0,0,0.35) 2px, rgba(0,0,0,0.35) 3px);
+              mask-image: repeating-linear-gradient(0deg, #000 0, #000 2px, rgba(0,0,0,0.35) 2px, rgba(0,0,0,0.35) 3px); }
+
+    /* 橫向訊號條（只存在討論區內，紅色） */
+    .glitch-bars { display: none; position: absolute; left: 0; right: 0; top: 0; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
+    body.private-on .glitch-bars { display: block; }
+    .glitch-bars i { position: absolute; display: block; height: 2px; background: var(--main-red-45); animation: barShift 3.4s steps(1, end) infinite; }
+    .glitch-bars i:nth-child(1) { top: 5.5cqw; right: 0; width: 38cqw; height: 0.5cqw; background: var(--main-red-20); animation-delay: -0.4s; }
+    .glitch-bars i:nth-child(2) { top: 9.2cqw; right: 2cqw; width: 22cqw; animation-delay: -1.2s; }
+    .glitch-bars i:nth-child(3) { top: 13.4cqw; right: 0; width: 30cqw; height: 0.9cqw; background: var(--main-red-70); animation-delay: -2.1s; }
+    .glitch-bars i:nth-child(4) { top: 15.6cqw; right: 6cqw; width: 14cqw; height: 0.4cqw; animation-delay: -0.8s; }
+    .glitch-bars i:nth-child(5) { top: 3cqw; left: 0; width: 8cqw; height: 0.7cqw; background: var(--main-red-70); animation-delay: -2.6s; }
+    .glitch-bars i:nth-child(6) { bottom: 5cqw; left: 0; width: 18cqw; height: 0.4cqw; animation-delay: -1.7s; }
+    .glitch-bars i:nth-child(7) { bottom: 3cqw; right: 0; width: 26cqw; height: 0.6cqw; background: var(--main-red-20); animation-delay: -0.1s; }
+    @keyframes barShift { 0%, 70%, 100% { transform: none; opacity: 1; } 72% { transform: translateX(-3cqw); } 76% { transform: translateX(2cqw); opacity: 0.5; } 80% { transform: none; } }
+
+    /* 裝飾字偶爾的水平切片錯位：用同一組字複製一份，只露出一小條並向左/右錯開（只有紅色） */
+    .glitch-big::after, .glitch-big-sub::after, .glitch-member-only::after { content: attr(data-text); position: absolute; left: 0; top: 0; white-space: nowrap; color: var(--main-red); opacity: 0; pointer-events: none; }
+    body.private-on .glitch-big::after { animation: textSlice 5.8s steps(1, end) -1.5s infinite; }
+    body.private-on .glitch-big-sub::after { animation: textSlice 7.2s steps(1, end) -4.1s infinite; }
+    body.hacked .glitch-member-only::after { animation: textSlice 6.4s steps(1, end) -2.6s infinite; }
+    @keyframes textSlice {
+      0%, 57%, 62%, 100% { opacity: 0; }
+      58% { opacity: 1; transform: translateX(-7px); clip-path: inset(22% 0 58% 0); }
+      59% { opacity: 1; transform: translateX(6px); clip-path: inset(58% 0 24% 0); }
+      60% { opacity: 1; transform: translateX(-3px); clip-path: inset(40% 0 44% 0); }
+      61% { opacity: 1; transform: translateX(4px); clip-path: inset(8% 0 80% 0); }
+    }
+
+    /* 小字：只有水平抖動、低頻閃爍、一點點紅色位移 */
+    body.hacked .glitch-text, body.hacked .glitch-member-only { animation: textTwitch 6.5s steps(1, end) infinite; }
+    body.hacked .gt-top { animation-duration: 7s; animation-delay: -1.2s; }
+    body.hacked .gt-bottom { animation-duration: 8s; animation-delay: -3.4s; }
+    body.hacked .glitch-member-only { animation-duration: 6s; animation-delay: -2.1s; }
+    body.private-on .glitch-big { animation: bigFlicker 7.5s steps(1, end) -4s infinite, textFlickIn 0.5s steps(1, end) 1; }
+    body.private-on .glitch-big-sub { animation: textTwitch 9s steps(1, end) -0.7s infinite, textFlickIn 0.5s steps(1, end) 0.1s 1 backwards; }
+    @keyframes textTwitch {
+      0%, 62%, 66%, 100% { transform: none; opacity: 1; text-shadow: none; }
+      63% { transform: translateX(-1.5px); text-shadow: 2px 0 rgba(200, 22, 29, 0.45); }
+      64% { transform: translateX(1px); }
+      65% { transform: none; opacity: 0.8; }
+    }
+    @keyframes bigFlicker { 0%, 38%, 41%, 100% { opacity: 1; } 39% { opacity: 0.8; } 40% { opacity: 0.92; } }
+    @keyframes textFlickIn { 0% { opacity: 0; } 30% { opacity: 1; } 55% { opacity: 0.25; } 75%, 100% { opacity: 1; } }
+
+    /* 暗黑配色 */
+    body.hacked { background: #000; color: #f2f2f2; }
+    body.hacked .navbar { background: #000; color: var(--main-red); border-bottom-color: transparent; transition: none; }
+    body.hacked .nav-center-slot a { color: var(--main-red) !important; filter: drop-shadow(0 0 6px rgba(200, 22, 29, 0.65)) drop-shadow(0 0 16px rgba(200, 22, 29, 0.3)); }   /* 只有 Logo 有穩定的紅色光暈 */
+    body.hacked .accordion-item, body.hacked .product-top-area + .accordion-item { border-color: #b50202; }
+    body.hacked .review-item { border-bottom-color: rgba(190, 2, 2, 0.5); }
+    body.hacked .reviews-mini, body.hacked .review-title, body.hacked .review-name { color: #fff; }
+    body.hacked .product-price { color: #fff; }
+    body.hacked .reviews-mini .count { color: #bdbdbd; }
+    body.hacked .review-text { color: #d8d8d8; }
+    body.hacked .stars svg, body.hacked .review-stars svg { fill: #fff; }
+    body.hacked .stars svg[fill="#e5e5e5"], body.hacked .review-stars svg[fill="#e5e5e5"] { fill: #444; }
+    body.hacked .btn-add-cart { border-color: #fff; color: #fff; transition: none; }
+    body.hacked .btn-add-cart:hover { background: #fff; color: #000; }
+    body.hacked .btn-wishlist { color: #fff; }
+    body.hacked .btn-wishlist svg path { stroke: #fff; }
+    body.hacked .btn-wishlist.active svg path { fill: var(--main-red); stroke: var(--main-red); }
+    body.hacked .review-avatar { background: #151515; border-color: #333; color: #888; }
+    body.hacked .cart-badge { background: var(--main-red); }
+    body.hacked .back-to-top { background: #111; color: #fff; border-color: #b50202; }
+    body.hacked .footer { background: #0b0000 !important; color: #aaa !important; border-top: 1px solid rgba(190, 2, 2, 0.5) !important; transition: none; }
+    body.hacked .footer a { color: #8a8a8a !important; }
+    body.hacked .footer svg { color: #e8e8e8 !important; }
+    body.hacked .footer .social-icon { color: #777 !important; }
+
+    /* 討論區本體 */
+    body.hacked .discussion-section { border-color: var(--main-red); box-shadow: 0 0 14px rgba(200, 22, 29, 0.28); }
+    body.hacked .disc-header, body.hacked .disc-footer { border-color: var(--main-red); }
+    body.hacked .disc-header .en { color: var(--main-red); }
+    body.hacked .tags { color: #cfcfcf; }
+    body.hacked .video-stats { color: var(--main-red); }
+    body.hacked .chat-bubble { filter: invert(1); }                 /* 白框、黑底、白字 */
+
+    @media (prefers-reduced-motion: reduce) {
+      body.hacked .glitch-text, body.hacked .glitch-member-only, body.private-on .glitch-big, body.private-on .glitch-big-sub, .gt-bottom .live-dot, .glitch-big::after, .glitch-big-sub::after, .glitch-member-only::after, .glitch-bars i { animation: none; }
+    }
+    @media (max-width: 820px) {
+      .gt-top { display: none !important; }
+      .glitch-big { font-size: 16cqw; top: 0; right: -2cqw; }
+      .glitch-big-sub { font-size: 3.2cqw; top: 15.5cqw; right: 3cqw; }
+      .glitch-member-only { font-size: 12px; left: 3cqw; }
+      .gt-bottom { font-size: 9px; }
+    }
+
+    /* ===== Custom Cursor（16px 實心圓）===== */
+    @media (hover: hover) and (pointer: fine) {
+      html.has-cursor, html.has-cursor * { cursor: none !important; }
+      .custom-cursor {
+        position: fixed; left: 0; top: 0; width: 16px; height: 16px; border-radius: 50%;
+        background: #111111; box-shadow: none;
+        pointer-events: none; z-index: 100000; opacity: 0;
+        transition: background-color 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease, scale 0.18s ease-out;
+        will-change: translate, scale;
+      }
+      .custom-cursor.visible { opacity: 1; }
+      /* 導購視窗：游標碰到商品圖變成半透明紅色毛玻璃圓 + POV（圓心不變，往四周長大） */
+      .custom-cursor { display: flex; align-items: center; justify-content: center;
+        transition: width 0.28s cubic-bezier(0.2, 0.7, 0.3, 1), height 0.28s cubic-bezier(0.2, 0.7, 0.3, 1), margin 0.28s cubic-bezier(0.2, 0.7, 0.3, 1), background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, scale 0.18s ease-out; }
+      .cursor-label { position: fixed; left: 0; top: 0; z-index: 100001; pointer-events: none; font-family: var(--font-brand, 'Montserrat', sans-serif); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; color: #fff; opacity: 0; transition: opacity 0.15s ease; user-select: none; will-change: translate; }
+      .cursor-label.on { opacity: 1; transition-delay: 0.1s; }
+      /* 色彩增值（multiply）：紅色疊在圖上，底下的明暗細節還看得到，不模糊 */
+      body.hacked.modal-2 .custom-cursor.is-view { width: 72px; height: 72px; margin: -28px 0 0 -28px; scale: 1; background: #c8161d; mix-blend-mode: multiply; box-shadow: none; }
+      /* hover 到可點擊元素：16px → 14px（scale 0.875），平滑縮小，無彈跳 */
+      .custom-cursor.is-small { scale: 0.875; }
+      /* 只有「加入購物車」與「討論區」hover 時才變紅，沒有 glow */
+      .custom-cursor.is-red { background: #c8161d; box-shadow: none; }
+      /* 正式進入討論區後：永遠紅色 + 細微紅色光暈 */
+      body.hacked .custom-cursor, body.hacked .custom-cursor.is-red {
+        background: #c8161d; box-shadow: 0 0 10px 4px rgba(200, 22, 29, 0.65), 0 0 26px 10px rgba(200, 22, 29, 0.35);
+      }
+    }
+
+
+    /* ===== 播放後的兩段式視窗：① 上傳原創影片獲取權限 → ② 推薦使用設備（從下方升起）===== */
+    .gate-dim { position: fixed; inset: 0; z-index: 90000; background: rgba(0,0,0,0.6); opacity: 0; visibility: hidden; transition: opacity 0.28s ease-out, visibility 0s linear 0.28s; }
+    .gate-dim.show { opacity: 1; visibility: visible; transition: opacity 0.28s ease-out; }
+    .gate-box { --u: min(5.22px, 0.92vw); position: fixed; z-index: 90001; left: 50%; top: 50%; width: calc(100 * var(--u)); box-sizing: border-box;
+      background: #000; border: 1px solid var(--main-red); box-shadow: 0 0 22px 6px rgba(200,22,29,0.55), 0 0 70px 18px rgba(200,22,29,0.3);
+      padding: 0 calc(8.2 * var(--u)) calc(7 * var(--u)); display: flex; flex-direction: column; justify-content: flex-start; color: #fff; font-family: 'Noto Sans TC', sans-serif;
+      opacity: 0; visibility: hidden; transform: translate(-50%, -46%); transition: opacity 0.22s ease-out, transform 0.22s ease-out, visibility 0s linear 0.22s; }
+    .gate-box.show { opacity: 1; visibility: visible; transform: translate(-50%, -50%); transition: opacity 0.22s ease-out, transform 0.22s ease-out; }
+    .gate-eyebrow { margin-top: calc(7 * var(--u)); padding-bottom: calc(4.7 * var(--u)); border-bottom: 1px solid var(--main-red); font-family: var(--font-brand); font-weight: 300; font-size: calc(3.3 * var(--u)); letter-spacing: 0.1em; color: var(--main-red); line-height: 1; }
+    .gate-title { margin-top: calc(8 * var(--u)); font-weight: 300; font-size: calc(8.1 * var(--u)); letter-spacing: 0.06em; line-height: 1.1; white-space: nowrap; }
+    .gate-title em { margin-left: calc(1.6 * var(--u)); font-style: normal; color: #ff2a33; text-shadow: 0.25px 0 rgba(200,22,29,0.9), -0.2px 0 rgba(200,22,29,0.5), 0 0 7px rgba(200,22,29,0.95), 0 0 16px rgba(200,22,29,0.6); }
+    .gate-sub { margin-top: calc(4.7 * var(--u)); font-weight: 300; font-size: calc(3.4 * var(--u)); letter-spacing: 0.08em; line-height: 1.2; white-space: nowrap; }
+    .gate-en { margin-top: calc(2.9 * var(--u)); font-family: var(--font-brand); font-weight: 300; font-size: calc(2.25 * var(--u)); letter-spacing: 0.14em; line-height: 1.4; white-space: nowrap; }
+    .gate-next { margin-top: calc(4.5 * var(--u)); width: calc(45.8 * var(--u)); height: calc(9.3 * var(--u)); box-sizing: border-box; padding: 0 calc(4.2 * var(--u)); display: flex; align-items: center; justify-content: space-between; background: transparent; border: 1px solid var(--main-red); color: var(--main-red); font-family: 'Noto Sans TC', sans-serif; font-weight: 300; font-size: calc(3.65 * var(--u)); letter-spacing: 0.08em; cursor: inherit; transition: background-color 0.15s, color 0.15s; }
+    .gate-next svg { width: calc(2.7 * var(--u)); height: calc(4.2 * var(--u)); fill: none; stroke: currentColor; stroke-width: 1.2; }
+    .gate-next:hover { background: var(--main-red); color: #fff; }
+    .gate-back { margin-top: calc(2.5 * var(--u)); align-self: flex-start; background: none; border: 0; padding: 0; color: #8a8a8a; font-family: 'Noto Sans TC', sans-serif; font-weight: 300; font-size: calc(2.6 * var(--u)); letter-spacing: 0.1em; cursor: inherit; }
+    .gate-back:hover { color: #fff; }
+    .gate-close { position: absolute; right: calc(8.2 * var(--u)); top: 36px; width: 22px; height: 22px; padding: 0; background: none; border: 0; color: var(--main-red); cursor: inherit;
+      filter: drop-shadow(0 0 5px rgba(200,22,29,0.9)) drop-shadow(0 0 14px rgba(200,22,29,0.55)); }
+    .gate-close svg { width: 100%; height: 100%; stroke: currentColor; stroke-width: 1.4; fill: none; display: block; }
+
+    /* ===== 上傳原創影片視窗（下一步之後）：尺寸以 --u（視窗寬度的 1%）為單位 ===== */
+    .up-wrap { --u: min(8.6px, 0.92vw); position: fixed; z-index: 90001; left: 50%; top: 50%; width: calc(100 * var(--u)); height: calc(72.55 * var(--u)); transform: translate(-50%, -48%); opacity: 0; visibility: hidden;
+      transition: opacity 0.22s ease-out, transform 0.22s ease-out, visibility 0s linear 0.22s; font-family: 'Noto Sans TC', sans-serif; color: #fff; }
+    .up-wrap.show { opacity: 1; visibility: visible; transform: translate(-50%, -50%); transition: opacity 0.22s ease-out, transform 0.22s ease-out; }
+    .up-box { position: absolute; left: 0; top: calc(4.425 * var(--u)); width: 100%; height: calc(63.7 * var(--u)); box-sizing: border-box; overflow: hidden; background: #000; border: 1px solid var(--main-red);
+      box-shadow: 0 0 22px 6px rgba(200,22,29,0.5), 0 0 70px 18px rgba(200,22,29,0.28); transition: height 0.7s cubic-bezier(0.22, 0.8, 0.3, 1), top 0.7s cubic-bezier(0.22, 0.8, 0.3, 1); }
+    .up-wrap.ext .up-box { top: 0; height: calc(72.55 * var(--u)); }   /* 收起時整個視窗置中；延伸時上緣往上、下緣往下，兩邊一起長 */
+    .up-close { position: absolute; right: calc(2.2 * var(--u)); top: calc(-1.175 * var(--u)); transition: top 0.7s cubic-bezier(0.22, 0.8, 0.3, 1); width: calc(2.7 * var(--u)); height: calc(2.7 * var(--u)); padding: 0; background: none; border: 0; color: var(--main-red); cursor: inherit; filter: drop-shadow(0 0 5px rgba(200,22,29,0.9)) drop-shadow(0 0 14px rgba(200,22,29,0.55)); }
+    .up-wrap.ext .up-close { top: calc(-5.6 * var(--u)); }
+    .up-close svg { width: 100%; height: 100%; stroke: currentColor; stroke-width: 1.4; fill: none; display: block; }
+    .up-inner { padding: calc(5.4 * var(--u)) calc(4.6 * var(--u)) 0; }
+    .up-title { padding-left: calc(2.2 * var(--u)); font-weight: 300; font-size: calc(5 * var(--u)); letter-spacing: 0.04em; line-height: 1.15; white-space: nowrap; }
+    .up-title em { font-style: normal; margin-left: 0.28em; color: #ff2a33; text-shadow: 0.25px 0 rgba(200,22,29,0.9), -0.2px 0 rgba(200,22,29,0.5), 0 0 7px rgba(200,22,29,0.95), 0 0 16px rgba(200,22,29,0.6); }
+    .up-sub { margin-top: calc(0.95 * var(--u)); padding-left: calc(2.2 * var(--u)); font-weight: 300; font-size: calc(2.5 * var(--u)); letter-spacing: 0.06em; white-space: nowrap; line-height: 1.45; }
+    .up-line { height: 1px; background: var(--main-red); }
+    .up-line.l1 { margin-top: calc(2.7 * var(--u)); }
+    .up-zone { margin-top: calc(2.5 * var(--u)); height: calc(37.4 * var(--u)); box-sizing: border-box; border: 1px dashed var(--main-red); border-radius: calc(3.4 * var(--u)); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: background-color 0.15s; }
+    .up-zone.drag { background: rgba(200,22,29,0.12); }
+    .up-zone svg.cloud { width: calc(9.9 * var(--u)); height: calc(7.9 * var(--u)); fill: none; stroke: var(--main-red); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+    .up-main { margin-top: calc(2.5 * var(--u)); font-weight: 300; font-size: calc(2.6 * var(--u)); letter-spacing: 0.08em; line-height: 1.45; }
+    .up-note { margin-top: calc(1.1 * var(--u)); font-weight: 300; font-size: calc(1.9 * var(--u)); letter-spacing: 0.08em; color: #8a8a8a; text-align: center; line-height: 1.16; }
+    .up-pick { margin-top: calc(2.8 * var(--u)); width: calc(36.9 * var(--u)); height: calc(7 * var(--u)); border: 1px solid #fff; border-radius: 999px; background: transparent; color: #fff; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: calc(2.5 * var(--u)); letter-spacing: 0.1em; cursor: inherit; transition: background-color 0.15s, color 0.15s; }
+    .up-pick:hover { background: #fff; color: #000; }
+    .up-foot { padding: 0 calc(4.6 * var(--u)); }
+    .up-foot .up-line { margin-top: calc(2.8 * var(--u)); }
+    .up-foot .up-line { opacity: 0; transition: opacity 0.5s 0.25s ease-out; }
+    .up-wrap.ext .up-foot .up-line { opacity: 1; }
+    .up-foot .row { height: calc(11.4 * var(--u)); box-sizing: border-box; padding-bottom: calc(0.8 * var(--u)); display: flex; align-items: center; justify-content: space-between; padding-left: calc(2.2 * var(--u)); opacity: 0; transition: opacity 0.5s 0.25s ease-out; }
+    .up-wrap.ext .up-foot .row { opacity: 1; }
+    .up-foot .ask { font-weight: 300; font-size: calc(2.5 * var(--u)); letter-spacing: 0.08em; }
+    .up-rec { width: calc(28 * var(--u)); height: calc(6.1 * var(--u)); display: flex; align-items: center; justify-content: space-between; padding: 0 calc(3.2 * var(--u)) 0 calc(3.2 * var(--u)); border: 1px solid var(--main-red); border-radius: 999px; background: transparent; color: var(--main-red);
+      font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: calc(2.5 * var(--u)); letter-spacing: 0.1em; cursor: inherit; box-shadow: 0 0 14px rgba(200,22,29,0.45), inset 0 0 12px rgba(200,22,29,0.18); text-shadow: 0 0 8px rgba(200,22,29,0.7); transition: background-color 0.15s, color 0.15s; }
+    .up-rec svg { width: calc(1.6 * var(--u)); height: calc(2.6 * var(--u)); fill: none; stroke: currentColor; stroke-width: 1.4; }
+    .up-rec:hover { background: var(--main-red); color: #fff; text-shadow: none; }
+    .rec-sheet { position: fixed; z-index: 90002; left: 50%; bottom: 0; width: min(1100px, 96vw); max-height: 94vh; overflow-y: auto; background: #000; color: #fff; border: 1px solid var(--main-red); border-bottom: 0; border-radius: 40px 40px 0 0; padding: 40px 56px 40px;
+      box-shadow: 0 0 22px 6px rgba(200,22,29,0.5), 0 0 70px 18px rgba(200,22,29,0.28);
+      transform: translate(-50%, 100%); visibility: hidden; transition: transform 0.46s cubic-bezier(0.22, 0.9, 0.3, 1), visibility 0s linear 0.46s; }
+    .rec-sheet.show { transform: translate(-50%, 0); visibility: visible; transition: transform 0.46s cubic-bezier(0.22, 0.9, 0.3, 1); }
+    .rec-head { padding-bottom: 26px; border-bottom: 1px solid var(--main-red); }
+    .rec-head .zh { font-family: 'Noto Sans TC', sans-serif; font-weight: 300; font-size: 40px; letter-spacing: 0.08em; line-height: 1.25; }
+    .rec-head .zh em { font-style: normal; margin-left: 0.3em; color: #ff2a33; text-shadow: 0 0 8px rgba(200,22,29,0.9), 0 0 20px rgba(200,22,29,0.55); }
+    .rec-head .sub { font-family: 'Noto Sans TC', sans-serif; font-weight: 300; font-size: 18px; letter-spacing: 0.08em; margin-top: 14px; color: #fff; }
+    .rec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin-top: 30px; }
+    .rec-img { position: relative; aspect-ratio: 1; background: #eceeef; overflow: hidden; }
+    .rec-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
+    .rec-img img.va { opacity: 0; }
+    .rec-img:hover img.va { opacity: 1; }
+    .rec-row { display: flex; justify-content: space-between; align-items: baseline; margin: 16px 14px 0; font-family: 'Noto Sans TC', sans-serif; font-size: 18px; font-weight: 300; letter-spacing: 0.05em; }
+    .rec-row .price { font-family: var(--font-brand); font-weight: 300; }
+    .rec-tag { margin: 12px 14px 0; color: var(--main-red); font-family: 'Noto Sans TC', sans-serif; font-weight: 300; font-size: 16px; letter-spacing: 0.06em; }
+    .rec-use { margin: 6px 14px 0; color: #fff; font-family: 'Noto Sans TC', sans-serif; font-weight: 300; font-size: 14px; letter-spacing: 0.04em; }
+    .rec-add { margin-top: 18px; width: 47%; min-width: 150px; height: 54px; font-family: 'Noto Sans TC', sans-serif; font-weight: 300; font-size: 19px; letter-spacing: 0.12em; color: var(--main-red); background: transparent; border: 1px solid var(--main-red); border-radius: 28px; cursor: inherit; transition: background-color 0.15s, color 0.15s; }
+    .rec-add:hover { background: var(--main-red); color: #fff; }
+    @media (max-width: 820px) { .rec-sheet { padding: 28px 20px 36px; border-radius: 28px 28px 0 0; } .rec-grid { grid-template-columns: 1fr; gap: 28px; } .rec-head .zh { font-size: 24px; } .rec-head .sub { font-size: 14px; } }
+    @media (hover: hover) and (pointer: fine) {
+      /* 第一個視窗：游標變白、沒有光暈；按下一步後恢復紅色光暈（見 .modal-1 是否存在）*/
+      body.hacked.modal-1 .custom-cursor, body.hacked.modal-1 .custom-cursor.is-red, body.hacked.modal-up .custom-cursor, body.hacked.modal-up .custom-cursor.is-red, body.hacked.modal-2 .custom-cursor, body.hacked.modal-2 .custom-cursor.is-red { background: #fff; box-shadow: none; }
+    }
+    body.modal-open { overflow: hidden; }
+
+    /* ===== 返回討論區 → 前置鏡頭自動拍照 ===== */
+    .cam-layer { position: absolute; inset: 0; z-index: 4; background: #0a0000; overflow: hidden; border-radius: inherit; }
+    .cam-layer video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+    .cam-scan { position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(200,22,29,0.12) 3px, rgba(0,0,0,0) 4px); mix-blend-mode: multiply; }
+    .cam-flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+    .cam-flash.go { animation: camFlash 0.28s ease-out; }
+    @keyframes camFlash { 0% { opacity: 0.85; } 100% { opacity: 0; } }
+    .cam-hud { position: absolute; left: 18px; right: 18px; top: 14px; display: flex; justify-content: space-between; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 14px; letter-spacing: 0.06em; color: #fff; text-shadow: 0 0 6px rgba(0,0,0,0.6); }
+    .cam-hud .live { color: var(--main-red); font-weight: 600; text-shadow: none; }
+    .cam-hud .live::before { content: ''; display: inline-block; width: 0.75em; height: 0.75em; border-radius: 50%; background: var(--main-red); margin-right: 0.5em; }
+    .cam-hud .live i { font-style: normal; color: #fff; font-weight: 400; margin-left: 1em; }
+    @media (min-width: 821px) {
+      /* 進入鏡頭畫面後：作者那一列收掉，影片 + 留言整塊往左上移，影片放大 */
+      .discussion-section.cam-mode .disc-author-row { display: none; }
+      .discussion-section.cam-mode .disc-body { padding-top: 40px; }
+      .discussion-section.cam-mode .disc-media-row { padding-left: 0; gap: 32px; }
+      .discussion-section.cam-mode .video-section { width: min(760px, 69%); flex: 0 0 min(760px, 69%); }
+      .discussion-section.cam-mode .video-box, .discussion-section.cam-mode .comments-marquee-box { height: 540px; }
+      .discussion-section.cam-mode .comments-marquee-box { min-width: 280px; padding-right: 20px; box-sizing: border-box; }
+    }
+    /* 留言像聊天室：從最底下一則一則往上推，最多 7 則；最底下那則和影片底邊對齊 */
+    .comments-track.chat-stack { height: 100%; justify-content: flex-end; padding-top: 0; }
+    .comments-track.chat-stack .chat-bubble:last-child { margin-bottom: 0; }
+    body.hacked .comments-track.chat-stack .chat-bubble { filter: none; color: #f2f2f2; }          /* 不用 filter（很吃效能）：直接畫成黑底白框 */
+    .comments-track.chat-stack .chat-bubble.out { opacity: 0; transition: opacity 0.1s linear; }
+    .comments-track.chat-stack { will-change: transform; }
+    .cam-brackets { position: absolute; left: 33%; top: 24%; width: 34%; height: 56%; pointer-events: none; opacity: 0; transition: opacity 0.3s, left 0.14s linear, top 0.14s linear, width 0.14s linear, height 0.14s linear; }
+    .cam-brackets b { width: 16%; height: 14%; }
+    .cam-layer.captured .cam-brackets, .cam-layer.live .cam-brackets { opacity: 1; }
+    .cam-brackets b { position: absolute; width: 14%; height: 12%; border: 0 solid var(--main-red); }
+    .cam-brackets b:nth-child(1) { left: 0; top: 0; border-width: 2px 0 0 2px; }
+    .cam-brackets b:nth-child(2) { right: 0; top: 0; border-width: 2px 2px 0 0; }
+    .cam-brackets b:nth-child(3) { left: 0; bottom: 0; border-width: 0 0 2px 2px; }
+    .cam-brackets b:nth-child(4) { right: 0; bottom: 0; border-width: 0 2px 2px 0; }
+    .cam-thumb { position: absolute; z-index: 2; left: 18px; top: 48px; width: 122px; height: 156px; transform-origin: 0 0; background: #000; border: 2px solid var(--main-red); box-sizing: border-box; overflow: hidden; opacity: 0; }
+    .cam-thumb.show { opacity: 1; animation: thumbIn 0.22s ease-out; }
+    @keyframes thumbIn { from { opacity: 0; transform: scale(0.88); } to { opacity: 1; transform: none; } }
+    .cam-thumb .cap { position: absolute; left: 0; right: 0; top: 0; z-index: 2; display: flex; justify-content: space-between; padding: 3px 5px; background: #000; font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 7px; letter-spacing: 0.04em; color: #fff; }
+    .cam-thumb img { position: absolute; left: 0; right: 0; bottom: 0; top: 0; width: 100%; height: 100%; object-fit: cover; top: 14px; height: calc(100% - 14px); }
+    .cam-readout { position: absolute; z-index: 3; left: 18px; top: 214px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .cam-readout span { display: inline-block; min-height: 26px; padding: 4px 10px; background: var(--main-red); color: #000; font-family: 'Noto Sans TC', ui-monospace, monospace; font-weight: 400; font-size: 14px; letter-spacing: 0.08em; line-height: 18px; white-space: pre; }
+    .cam-readout span.mono { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, 'Roboto Mono', monospace; }
+    .cam-readout span.typing::after { content: '▌'; margin-left: 2px; animation: caretBlink 0.5s steps(1) infinite; }
+    @keyframes caretBlink { 50% { opacity: 0; } }
+    @media (max-width: 820px) { .cam-thumb { width: 84px; height: 108px; top: 40px; } .cam-readout { top: 158px; gap: 4px; } .cam-readout span { font-size: 11px; min-height: 20px; padding: 2px 7px; line-height: 16px; } .cam-hud { font-size: 10px; } }
+
+
+    /* ===== 小型 OPAQUE：hover 文字解碼效果（每個字元固定寬度，亂碼不會推動版面）===== */
+    .brand-name { width: fit-content; }                 /* hover 範圍只限文字本身，位置與尺寸不變 */
+    .brand-name .sc { display: inline-block; white-space: pre; }
+
+    /* ===== 商品頁進場動畫（只作用在 main 內的商品內容，Header 不受影響）===== */
+    @keyframes pdpRise    { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+    @keyframes pdpRiseImg { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: none; } }
+
+    /* 載入前先隱藏（由 head 內的小 script 加上 pdp-pre；若 JS 失效則不會隱藏，內容照常顯示）*/
+    html.pdp-pre .pdp-container .gallery-wrapper,
+    html.pdp-pre .pdp-container .brand-name,
+    html.pdp-pre .pdp-container .product-title,
+    html.pdp-pre .pdp-container .product-price,
+    html.pdp-pre .pdp-container .sales-info,
+    html.pdp-pre .pdp-container .reviews-mini,
+    html.pdp-pre .pdp-container .shipping-info,
+    html.pdp-pre .pdp-container .action-group,
+    html.pdp-pre .pdp-container .short-desc,
+    html.pdp-pre .pdp-container .accordion-item,
+    html.pdp-pre .pdp-container .reviews-header,
+    html.pdp-pre .pdp-container .review-list,
+    html.pdp-pre .pdp-container > .see-more-link,
+    html.pdp-pre .pdp-container .discussion-section { opacity: 0; }
+
+    /* 依序進場：每一組只差約 40–60ms，整體約 1.5 秒內完成。fill-mode 用 backwards：動畫結束後不留下任何樣式，hover / active 效果照常 */
+    html.pdp-enter .pdp-container .gallery-wrapper { animation: pdpRiseImg 0.64s cubic-bezier(0.22, 1, 0.36, 1) 0.00s backwards; }
+    html.pdp-enter .pdp-container .brand-name      { animation: pdpRise 0.54s cubic-bezier(0.22, 1, 0.36, 1) 0.16s backwards; }
+    html.pdp-enter .pdp-container .product-title   { animation: pdpRise 0.54s cubic-bezier(0.22, 1, 0.36, 1) 0.22s backwards; }
+    html.pdp-enter .pdp-container .product-price   { animation: pdpRise 0.54s cubic-bezier(0.22, 1, 0.36, 1) 0.35s backwards; }
+    html.pdp-enter .pdp-container .sales-info,
+    html.pdp-enter .pdp-container .reviews-mini,
+    html.pdp-enter .pdp-container .shipping-info   { animation: pdpRise 0.54s cubic-bezier(0.22, 1, 0.36, 1) 0.51s backwards; }
+    html.pdp-enter .pdp-container .action-group    { animation: pdpRise 0.54s cubic-bezier(0.22, 1, 0.36, 1) 0.67s backwards; }
+    html.pdp-enter .pdp-container .short-desc      { animation: pdpRise 0.54s cubic-bezier(0.22, 1, 0.36, 1) 0.80s backwards; }
+    html.pdp-enter .pdp-container .accordion-item  { animation: pdpRise 0.54s cubic-bezier(0.22, 1, 0.36, 1) 0.88s backwards; }
+    html.pdp-enter .pdp-container .reviews-header,
+    html.pdp-enter .pdp-container .review-list,
+    html.pdp-enter .pdp-container > .see-more-link,
+    html.pdp-enter .pdp-container .discussion-section { animation: pdpRise 0.54s cubic-bezier(0.22, 1, 0.36, 1) 0.96s backwards; }
+  </style>
+  <script>
+    /* 進場動畫的前置：先標記為「準備中」，內容隱藏；減少動態效果的使用者不播放 */
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('pdp-pre');
+  </script>
+</head>
+<body>
+
+  <!-- ==================== 導覽列 ==================== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="nav-menu-btn"><span></span><span></span><span></span></a>
+    </div>
+    
+    <div class="nav-center-slot">
+      <a href="index.html" style="display: block; color: var(--color-text-dark);">
+        <svg style="height: 22px; width: auto;" viewBox="0 0 721.83 122.52" fill="currentColor">
+          <path fill="currentColor" d="M58.81.48C26.89,1.51,1.07,27.33.03,59.25c-.55,16.99,5.77,32.97,17.8,45,11.55,11.55,26.73,17.83,42.95,17.83.68,0,1.37-.01,2.05-.03,31.92-1.04,57.73-26.86,58.77-58.77.55-16.99-5.77-32.97-17.8-45C91.78,6.25,75.8-.03,58.81.48ZM89.43,89.88c-8.04,8.04-19.17,12.34-30.52,11.83-20.66-.95-37.59-17.88-38.54-38.54-.52-11.36,3.79-22.48,11.83-30.52,7.6-7.6,17.96-11.87,28.67-11.87.62,0,1.23.01,1.85.04,20.66.95,37.59,17.88,38.54,38.54.52,11.36-3.79,22.48-11.83,30.52Z"/>
+          <path fill="currentColor" d="M596.19,0h-9.42v70.15c0,8.51-3.35,16.51-9.44,22.5-6.08,5.99-14.12,9.28-22.65,9.09-17.15-.26-31.11-14.68-31.11-32.14V0h-9.42c-6.02,0-10.91,4.9-10.91,10.91v58.64c0,28.69,23.07,52.26,51.42,52.53.17,0,.35,0,.52,0,13.76,0,26.71-5.33,36.52-15.04,9.93-9.84,15.41-22.94,15.41-36.88V10.91c0-6.02-4.9-10.91-10.91-10.91Z"/>
+          <path fill="currentColor" d="M201.28.44h-43.78c-6.02,0-10.91,4.9-10.91,10.91v9.42h54.78c9.26,0,16.97,7.35,17.18,16.38.11,4.56-1.59,8.86-4.78,12.13-3.19,3.27-7.45,5.07-12,5.07h-44.74v.05c-5.57.49-9.96,5.18-9.96,10.87v57.25h20.33v-47.84h34.37c10.01,0,19.4-3.94,26.44-11.08,7.04-7.15,10.83-16.6,10.68-26.61-.31-20.15-17.18-36.54-37.61-36.54Z"/>
+          <path fill="currentColor" d="M627.81,61.99v49.2c0,6.02,4.9,10.91,10.91,10.91h4.83l78.28-.02v-20.33h-73.69v-30.32h73.69v-20.33l-83.11-.02c-6.02,0-10.91,4.9-10.91,10.91Z"/>
+          <path fill="currentColor" d="M710.92.44h-72.08c-6.02,0-10.91,4.9-10.91,10.91v9.42h93.9v-9.42c0-6.02-4.89-10.91-10.91-10.91Z"/>
+          <path fill="currentColor" d="M293.51.44h-.01c-4.32,0-8.12,2.57-9.92,6.71l-50.13,115.36h22.36l37.65-86.65,37.37,86.65h22.33L303.43,7.19c-1.79-4.15-5.59-6.74-9.92-6.74Z"/>
+          <path fill="currentColor" d="M421.28,0c-33.66,0-61.05,27.39-61.05,61.05s27.39,61.05,61.05,61.05c12.2,0,23.56-3.61,33.11-9.8l6.65,6.65c1.92,1.92,4.48,2.98,7.2,2.98s5.28-1.06,7.2-2.98c1.93-1.92,2.98-4.48,2.98-7.2s-1.06-5.28-2.99-7.2l-6.02-6.02c8.08-10.35,12.91-23.35,12.91-37.47,0-33.66-27.39-61.05-61.05-61.05ZM437.35,66.45c-1.92-1.93-4.48-2.98-7.2-2.98s-5.28,1.06-7.2,2.98c-3.97,3.97-3.97,10.43,0,14.41l16.55,16.55c-5.48,2.76-11.67,4.32-18.21,4.32-22.43,0-40.67-18.25-40.67-40.67s18.25-40.67,40.67-40.67,40.67,18.25,40.67,40.67c0,8.49-2.62,16.38-7.09,22.91l-17.51-17.51Z"/>
+        </svg>
+      </a>
+    </div>
+    <div class="nav-actions">
+      <button class="nav-icon-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"></circle><line x1="16.5" y1="16.5" x2="21.5" y2="21.5"></line></svg></button>
+      <button class="nav-icon-btn"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></button>
+      <button class="nav-icon-btn"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></button>
+    </div>
+  </header>
+
+  <main class="pdp-container">
+    <div class="product-top-area">
+      
+      <!-- 左欄：圖片展示與敘述 -->
+      <div class="left-column" style="display: contents;">
+        <div class="gallery-wrapper">
+          <div class="main-image"><img id="mainProductImage" src="./images/household_2.png" alt="不鏽鋼鏡子"></div>
+          <div class="thumbnail-list">
+            <div class="thumb-item active"><img src="./images/household_2.png"></div>
+            <div class="thumb-item"><img src="./images/household_2_2.png"></div>
+            <div class="thumb-item"><img src="./images/household_2_3.png"></div>
+            <div class="thumb-item"><img src="./images/household_2_4.png"></div>
+          </div>
+        </div>
+
+        <div class="short-desc">
+          一面有放大效果<br>適用乾溼分離之浴室
+          <span class="gray-text">產品編號 #005</span>
+        </div>
+      </div>
+
+      <!-- 右欄：購買資訊 -->
+      <div class="product-info-panel">
+        <div class="brand-name">OPAQUE</div>
+        <h1 class="product-title">不鏽鋼鏡子</h1>
+        <div class="product-price">$790</div>
+        
+        <div class="sales-info">1250人已購買此產品</div>
+        <div class="reviews-mini">
+          <div class="stars">
+            <!-- 4.4顆星 -->
+            <svg viewBox="0 0 17.62 16.84"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84" fill="#e5e5e5"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+          </div>
+          <span class="score">4.4</span>
+          <span class="count">367則討論</span> 
+        </div>
+        <div class="shipping-info">宅配、超商取貨，運費 $60/箱</div>
+
+        <div class="action-group">
+          <button class="btn-add-cart">加入購物車</button>
+          <button class="btn-wishlist" aria-label="加入收藏" aria-pressed="false"><svg viewBox="0 0 40.14 37.32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M19.92,36.57c-1.22-1.58-2.45-2.7-3.85-3.95l-4.31-3.86c-3.06-2.74-5.93-5.6-8.3-8.95C1.21,16.62.15,13.12.6,9.21,1.52,5.15,4.59,1.59,8.77.71c4.57-.96,8.79,1.49,11.3,5.44C22.38,2.44,26.42-.14,30.88.66c6.49,1.16,10.1,7.72,8.29,13.97-.97,3.36-2.72,6.13-5.32,8.61l-13.93,13.33Z"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 中半部：折疊選單區 -->
+    <div class="accordion-item">
+      <div><div class="acc-title">產品資訊</div><div class="acc-en">Product information</div></div>
+      <svg width="22" height="32" viewBox="0 0 22 32" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="2 2 20 16 2 30"></polyline></svg>
+    </div>
+    <div class="accordion-item">
+      <div><div class="acc-title">產品尺寸</div><div class="acc-en">Product dimensions</div></div>
+      <svg width="22" height="32" viewBox="0 0 22 32" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="2 2 20 16 2 30"></polyline></svg>
+    </div>
+
+    <!-- ==================== 評價區塊 ==================== -->
+    <div class="reviews-header">
+      <div class="title-box">
+        <span class="title">評價區</span>
+        <span class="en">Reviews section</span>
+      </div>
+      <div class="count">1110 則評價</div>
+    </div>
+
+    <div class="review-list">
+      <div class="review-item">
+        <div class="review-avatar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+        <div class="review-content">
+          <div class="review-name">Jn*</div>
+          <div class="review-stars">
+            <svg viewBox="0 0 17.62 16.84" fill="#111"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84" fill="#111"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84" fill="#111"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84" fill="#111"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84" fill="#111"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+          </div>
+          <div class="review-title">防霧效果與透視度極佳</div>
+          <div class="review-text">本來擔心放在乾濕分離的浴室水氣會太重，但洗完熱水澡，鏡面背後的「透視孔」完全沒有起霧。<br>即使在微光模式下，自動對焦跟收音依然很清晰，非常推薦給需要長時間佈局的人。</div>
+        </div>
+      </div>
+      <div class="review-item">
+        <div class="review-avatar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+        <div class="review-content">
+          <div class="review-name">W4*</div>
+          <div class="review-stars">
+            <svg viewBox="0 0 17.62 16.84" fill="#111"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84" fill="#111"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84" fill="#111"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84" fill="#111"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84" fill="#e5e5e5"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+          </div>
+          <div class="review-title">廣角完美，但散熱需注意</div>
+          <div class="review-text">裝在洗手台上方，廣角剛好能涵蓋整個淋浴區與馬桶。雲端直播功能省下很多轉檔麻煩。<br>扣一顆星是因為連續轉三小時後鏡面會微熱，另外線材有點短，藏線花了一點時間。</div>
+        </div>
+      </div>
+      <div class="review-item">
+        <div class="review-avatar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+        <div class="review-content">
+          <div class="review-name">Ay*</div>
+          <div class="review-stars">
+            <svg viewBox="0 0 17.62 16.84" fill="#111"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84" fill="#e5e5e5"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84" fill="#e5e5e5"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84" fill="#e5e5e5"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+            <svg viewBox="0 0 17.62 16.84" fill="#e5e5e5"><path d="M3.77,10.43L.27,7.23c-.52-.48-.24-1.35.46-1.43l4.71-.53c.29-.03.54-.21.66-.48L8.06.48c.29-.65,1.21-.65,1.5,0l1.96,4.32c.12.26.37.45.66.48l4.71.53c.7.08.99.95.46,1.43l-3.5,3.19c-.21.2-.31.49-.25.77l.96,4.64c.14.69-.6,1.23-1.21.88l-4.12-2.34c-.25-.14-.56-.14-.81,0l-4.12,2.34c-.62.35-1.36-.19-1.21-.88l.96-4.64c.06-.28-.04-.58-.25-.77Z"/></svg>
+          </div>
+          <div class="review-title">這到底是什麼奇怪的鏡子？千萬別買！</div>
+          <div class="review-text">買來當化妝鏡，結果收到發現背後一堆奇怪的線路跟插孔，晚上關燈還會閃微弱的紅光！<br>嚇得我趕快拔掉，私訊客服要求退貨也完全不回！一般人千萬不要買！！！</div>
+        </div>
+      </div>
+    </div>
+    
+    <a href="#" class="see-more-link">查看更多 See more ...</a>
+
+    <!-- ==================== 討論區板塊 ==================== -->
+    <div class="discussion-section" id="discussionSection">
+      <div class="glitch-big" aria-hidden="true" data-text="PRIVATE">PRIVATE</div>
+      <div class="glitch-big-sub" aria-hidden="true" data-text="member access only">member access only</div>
+      <div class="glitch-text gt-top" aria-hidden="true">anonymous //<br>member verified<br>private channel<br>session active</div>
+      <div class="glitch-text gt-bottom" aria-hidden="true">encrypted session<br>viewing anonymously<br><span class="live-dot"></span>LIVE</div>
+      <div class="glitch-member-only" aria-hidden="true" data-text="member only">member only</div>
+      <div class="glitch-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="disc-header">
+        <div class="title">討論區</div>
+        <span class="en">discussion board</span>
+      </div>
+      
+      <div class="disc-body">
+        <div class="disc-author-row">
+          <div class="author-info">
+            <div class="review-avatar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+            <div>
+              <div class="name">匿名小陳</div>
+              <div class="post-title"><span class="hang">【</span>實拍測評】日租套房衛浴無死角佈局</div>
+            </div>
+          </div>
+          <div class="tags">#衛浴實拍 #4K直出 #VIP限定</div>
+        </div>
+
+        <div class="disc-media-row">
+          <!-- 影片區塊 -->
+          <div class="video-section">
+            <div class="video-box">
+              <div class="video-blur-bg"></div>
+              <div class="video-vignette"></div>
+              <video class="main-video" src="./video/household_2_video.mp4" preload="auto" playsinline></video>
+              <!-- 縮小的專屬播放鍵 SVG -->
+              <div class="play-btn">
+                <svg viewBox="0 0 58.65 65.92"><path fill="#fff" opacity="0.49" d="M55.72,27.89L8.79.79C4.88-1.46,0,1.36,0,5.87v54.18c0,4.51,4.88,7.33,8.79,5.08l46.93-27.09c3.91-2.26,3.91-7.89,0-10.15Z"/></svg>
+              </div>
+            </div>
+            
+            <!-- 即時動態數據統計區 (替換為你的專屬 SVG) -->
+            <div class="video-stats">
+              <div>
+                <svg viewBox="0 0 40.98 24.6"><g><path d="M25.39,24.04C14.85,26.4,5.63,21.02,0,12.3,2.64,8.2,6.13,4.74,10.43,2.49c6.26-3.3,13.68-3.33,19.97-.08,4.36,2.22,7.93,5.75,10.58,9.88-3.65,5.67-8.91,10.12-15.59,11.74ZM28.66,12.3c0-4.51-3.65-8.16-8.16-8.16s-8.16,3.65-8.16,8.16,3.65,8.16,8.16,8.16,8.16-3.65,8.16-8.16Z"/><circle cx="20.49" cy="12.3" r="4.94"/></g></svg>
+                <span class="counter-num" id="liveViews">1280</span> 觀看
+              </div>
+              <div>
+                <svg viewBox="0 0 29.35 29.31"><path d="M25.03,28.92l-1.97-.86c-.64-.28-1.5-.51-2.2-.22-4.32,1.8-8.45,1.88-12.72-.12-2.88-1.35-5.29-3.9-6.7-6.73-.64-1.28-1.09-2.54-1.26-3.95L0,15.48v-1.22c0-1.1.15-2.15.43-3.25l.68-2.02c.32-.97.88-1.8,1.45-2.63.92-1.36,1.99-2.47,3.31-3.43C8.2,1.24,10.85.24,13.76.15c.39-.01.75-.19,1.2-.13l1.86.24c3.38.6,6.47,2.22,8.7,4.81l1,1.29.69,1.11c1.17,1.89,1.75,4.03,1.88,6.28l.02,1.91-.14.8c-.06,1.34-.53,2.57-.92,3.82-.24.75-.08,1.44.14,2.12l.52,1.64.48,1.55c.31,1,.19,2.08-.52,2.89-.92,1.05-2.38.98-3.63.43Z"/></svg>
+                <span class="counter-num" id="liveDiscuss">980</span> 討論
+              </div>
+              <div>
+                <svg viewBox="0 0 30.87 27.45"><path d="M28.82.07l-25.17-.07L0,.1l10.37,10.12L28.82.07ZM16.46,27.45L30.87,1.77,12.24,12.43l4.22,15.02Z"/></svg>
+                <span class="counter-num" id="liveShares">700</span> 分享
+              </div>
+            </div>
+          </div>
+
+          <!-- 留言跳動區塊 (完美符合客製化對話框設計) -->
+          <div class="comments-marquee-box">
+            <div class="comments-track" id="commentsTrack">
+              <div class="chat-bubble">這畫質真的超頂</div>
+              <div class="chat-bubble">視角太無敵了吧...</div>
+              <div class="chat-bubble">已下單設備，等收成</div>
+              <div class="chat-bubble">流口水了都太香了</div>
+              <div class="chat-bubble">防霧有夠猛，完全沒糊</div>
+              <div class="chat-bubble">這批貨有夠純</div>
+              <div class="chat-bubble">這角度剛剛好！</div>
+              <div class="chat-bubble">求教學怎麼安裝</div>
+              <div class="chat-bubble">感謝無私分享</div>
+              <div class="chat-bubble">已經推坑給室友了</div>
+              <div class="chat-bubble">這收音太清楚了吧</div>
+              <div class="chat-bubble">已收藏，晚點再看</div>
+              <div class="chat-bubble">全身上下都好美...</div>
+              <div class="chat-bubble">太頂...我不行了</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="disc-footer">
+        <a href="#" class="see-more-link">查看更多 See more ...</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==================== 頁尾 Footer ==================== -->
+  <footer class="footer" style="background-color: #f1f2f6; padding: 43px 44px 86px; font-size: 14px; color: #333333; width: 100%;">
+    <div class="footer-inner" style="max-width: 1116px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px;">
+      
+      <div class="footer-brand" style="display: flex; flex-direction: column; gap: 83px;">
+        <a href="index.html" class="footer-logo-link" style="display: inline-block; transition: opacity 0.2s ease;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+          <svg style="height: 28px; width: auto; color: #111;" viewBox="0 0 721.83 122.52" fill="currentColor">
+            <path fill="currentColor" d="M58.81.48C26.89,1.51,1.07,27.33.03,59.25c-.55,16.99,5.77,32.97,17.8,45,11.55,11.55,26.73,17.83,42.95,17.83.68,0,1.37-.01,2.05-.03,31.92-1.04,57.73-26.86,58.77-58.77.55-16.99-5.77-32.97-17.8-45C91.78,6.25,75.8-.03,58.81.48ZM89.43,89.88c-8.04,8.04-19.17,12.34-30.52,11.83-20.66-.95-37.59-17.88-38.54-38.54-.52-11.36,3.79-22.48,11.83-30.52,7.6-7.6,17.96-11.87,28.67-11.87.62,0,1.23.01,1.85.04,20.66.95,37.59,17.88,38.54,38.54.52,11.36-3.79,22.48-11.83,30.52Z"/>
+            <path fill="currentColor" d="M596.19,0h-9.42v70.15c0,8.51-3.35,16.51-9.44,22.5-6.08,5.99-14.12,9.28-22.65,9.09-17.15-.26-31.11-14.68-31.11-32.14V0h-9.42c-6.02,0-10.91,4.9-10.91,10.91v58.64c0,28.69,23.07,52.26,51.42,52.53.17,0,.35,0,.52,0,13.76,0,26.71-5.33,36.52-15.04,9.93-9.84,15.41-22.94,15.41-36.88V10.91c0-6.02-4.9-10.91-10.91-10.91Z"/>
+            <path fill="currentColor" d="M201.28.44h-43.78c-6.02,0-10.91,4.9-10.91,10.91v9.42h54.78c9.26,0,16.97,7.35,17.18,16.38.11,4.56-1.59,8.86-4.78,12.13-3.19,3.27-7.45,5.07-12,5.07h-44.74v.05c-5.57.49-9.96,5.18-9.96,10.87v57.25h20.33v-47.84h34.37c10.01,0,19.4-3.94,26.44-11.08,7.04-7.15,10.83-16.6,10.68-26.61-.31-20.15-17.18-36.54-37.61-36.54Z"/>
+            <path fill="currentColor" d="M627.81,61.99v49.2c0,6.02,4.9,10.91,10.91,10.91h4.83l78.28-.02v-20.33h-73.69v-30.32h73.69v-20.33l-83.11-.02c-6.02,0-10.91,4.9-10.91,10.91Z"/>
+            <path fill="currentColor" d="M710.92.44h-72.08c-6.02,0-10.91,4.9-10.91,10.91v9.42h93.9v-9.42c0-6.02-4.89-10.91-10.91-10.91Z"/>
+            <path fill="currentColor" d="M293.51.44h-.01c-4.32,0-8.12,2.57-9.92,6.71l-50.13,115.36h22.36l37.65-86.65,37.37,86.65h22.33L303.43,7.19c-1.79-4.15-5.59-6.74-9.92-6.74Z"/>
+            <path fill="currentColor" d="M421.28,0c-33.66,0-61.05,27.39-61.05,61.05s27.39,61.05,61.05,61.05c12.2,0,23.56-3.61,33.11-9.8l6.65,6.65c1.92,1.92,4.48,2.98,7.2,2.98s5.28-1.06,7.2-2.98c1.93-1.92,2.98-4.48,2.98-7.2s-1.06-5.28-2.99-7.2l-6.02-6.02c8.08-10.35,12.91-23.35,12.91-37.47,0-33.66-27.39-61.05-61.05-61.05ZM437.35,66.45c-1.92-1.93-4.48-2.98-7.2-2.98s-5.28,1.06-7.2,2.98c-3.97,3.97-3.97,10.43,0,14.41l16.55,16.55c-5.48,2.76-11.67,4.32-18.21,4.32-22.43,0-40.67-18.25-40.67-40.67s18.25-40.67,40.67-40.67,40.67,18.25,40.67,40.67c0,8.49-2.62,16.38-7.09,22.91l-17.51-17.51Z"/>
+          </svg>
+        </a>
+
+        <div class="social-icons" style="display: flex; gap: 10px;">
+          <a href="#" class="social-icon" aria-label="LINE" style="width: 25px; height: 25px; color: #999; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#999'">
+            <svg viewBox="0 0 260.39 248.07"><path fill="currentColor" d="M249.91,64.16c-10.75-20.31-28.35-36.2-48.56-46.94C169.66.37,131.66-3.96,96.68,3.56,60.11,11.42,25.09,33.46,8.66,67.72c-11.54,24.07-11.52,51.75-.1,75.87,10.52,22.2,29.04,39.43,50.72,50.82,14.82,7.79,30.78,12.74,47.33,15.17,3.87.57,7.36,1.45,10.64,3.41,2.09,1.25,3.35,3.11,3.68,5.53.41,3,.37,5.96-.12,9l-2.24,13.99c-.25,1.58-.23,3.32.63,4.79,1.93,3.33,8.77,1.31,12.2-.57l14.6-8.01c24.26-14.56,51.22-33.55,72.16-52.55,5.96-5.41,11.29-10.96,16.56-17.03,6.85-7.88,12.77-16.26,17.28-25.7,12.05-25.16,10.9-53.72-2.09-78.29ZM84.19,136.87c0,1.44-1.05,2.41-2.5,2.41h-36.25c-1.68,0-2.71-1.08-2.71-2.76l.02-56.6c0-1.32,1.13-2.29,2.33-2.29h9.48c1.4,0,2.34,1.14,2.34,2.56v45.02s24.79,0,24.79,0c1.35,0,2.36.9,2.51,2.35l-.02,9.32ZM106.26,136.83c0,1.36-1.03,2.43-2.41,2.44h-9.33c-1.31.02-2.45-.99-2.45-2.44v-56.95c.01-1.43,1.3-2.37,2.5-2.37h9.3c1.42.16,2.39,1.1,2.39,2.66v56.66ZM169.08,136.53c0,1.55-1.08,2.58-2.53,2.58h-9.48c-.72-.07-1.23-.32-1.65-.94l-25.96-35-.05,33.83c0,1.67-1.14,2.6-2.53,2.6l-8.88.02c-1.44,0-2.69-.89-2.69-2.5v-56.64c-.03-1.65,1.18-2.6,2.7-2.57l10.47.04,26.45,35.65.04-33.44c0-1.53.98-2.57,2.47-2.66l9.27.05c1.45,0,2.37,1.13,2.37,2.63v56.36ZM217.13,139.29h-36.83c-1.33,0-2.28-1.13-2.28-2.45v-56.67c0-1.54,1.06-2.55,2.57-2.55h36.26c1.4,0,2.62.87,2.62,2.28l.03,9.37c0,1.43-1.18,2.53-2.63,2.48h-24.66s0,9.56,0,9.56l24.89.02c1.34,0,2.39,1.03,2.4,2.35v9.38c.01,1.3-.97,2.42-2.47,2.46h-24.82s0,9.58,0,9.58l24.89.02c1.34,0,2.39,1.04,2.4,2.35v9.39c.01,1.24-.99,2.42-2.36,2.42Z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Facebook" style="width: 25px; height: 25px; color: #999; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#999'">
+            <svg viewBox="0 0 265.91 264.2"><path fill="currentColor" d="M138.01,0s.06.15.14.15l2.46.07c17.34,1.01,34.26,5.32,49.92,12.86,27.21,13.1,49.26,35.17,62.34,62.39,7.52,15.65,11.8,32.51,12.82,49.84l.08,4.94c0,.09.1.15.15.14v4.98s-.15.05-.15.14l-.08,5.06c-1.34,23.05-8.56,45.27-21.16,64.65-20.56,31.61-53.5,53.16-90.77,58.97v-92.83s30.97-.01,30.97-.01l5.88-38.42h-36.85s.02-25.78.02-25.78c.12-3.14.6-6.05,1.81-8.9,1.83-4.39,5.28-7.67,9.74-9.35,2.85-1.11,5.75-1.52,8.85-1.66h18.03s0-32.74,0-32.74c-9.09-1.41-18.04-2.35-27.16-2.56-5.35-.13-10.51.18-15.72,1.26-18.63,3.81-31.16,16.19-35.38,34.71-1.08,4.75-1.66,9.47-1.67,14.39l-.03,30.27c0,.16.01.23-.03.31-.03.06-.1.04-.26.04h-31.06s-1.98-.02-1.98-.02c-.12,0-.28,0-.33.05-.06.07-.1.15-.1.37v38.02s33.22,0,33.22,0c.21,0,.37-.04.49.02.08.04.06.21.06.45v92.1c.02.16,0,.21-.05.27-15.59-2.44-30.6-7.67-44.38-15.44-8.82-4.97-17.03-10.9-24.45-17.72l-.17-.15-.17-.15c-18.61-17.14-32.03-39.2-38.51-63.7l-2.33-10.54-1.08-7.13-.83-8.86v-.28s0-.28,0-.28v-.27s-.03-.24-.03-.24l-.06-.22c-.08-.32-.02-.59-.05-.93l-.02-.26c0-.11-.07-.14-.13-.14l.04-9.97.2-1.46c.87-17.64,5.17-34.88,12.81-50.84,10.07-21.01,25.49-39,44.65-52.21C77.73,9.59,101.06,1.63,125.33.23l2.59-.21,10.09-.02Z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Instagram" style="width: 25px; height: 25px; color: #999; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#999'">
+            <svg viewBox="0 0 248.29 248.21"><path fill="currentColor" d="M248.29,55.3v134.56c-.1-.01-.24.09-.24.26l-.13,6.33c-.63,5.64-1.62,11-3.55,16.29-5.85,16.01-18.79,27.98-35.18,32.63-4.68,1.33-9.31,2.02-14.17,2.45l-3.61.11c-.32,0-.65.07-.72.28H59.37c-1.63-.52-3.38-.12-5.14-.33-4.5-.53-8.79-.92-13.17-1.98-17.42-4.23-31.37-16.81-37.3-33.75-1.66-4.74-2.42-9.61-3.09-14.63l-.67-4.99L.1,57.69c0-5.97,1-11.86,2.42-17.56C6.29,25.01,16.72,12.48,30.75,5.88c4-1.88,7.89-3.38,12.28-4.11C47.19,1.08,51.43,0,55.8,0h134.22c5.34,0,10.5.84,15.66,1.89,13.62,2.78,25.65,10.89,33.24,22.5,4.51,6.91,7.34,14.53,8.36,22.65l.78,6.26c.09.68-.27,1.49.23,1.99ZM167.36,215.35c7.21-.61,13.84-2.24,20.26-5.19,5.61-2.58,10.33-6.1,14.53-10.59,4.74-5.06,8.16-10.88,10.33-17.49,1.86-5.66,3.01-11.33,3.26-17.31l.52-12.67.2-28.9-.25-29.62c-.11-13.04-1.48-26.4-8.36-37.6-8.89-14.47-23.48-21.66-40.22-23.16-9.27-.83-18.26-.94-27.59-.94h-31.77c-9.33,0-18.33.12-27.59.94-7.8.7-15.23,2.59-22.17,6.26-8.55,4.53-15.55,11.64-19.87,20.29-3.45,6.92-5.25,14.25-5.86,21.99-.81,10.26-.93,20.23-.9,30.54l.08,34.74c.02,7.07.25,13.8.89,20.78,1.18,12.92,5.58,24.65,14.94,33.75,3.9,3.8,8.11,6.78,13.1,9.04,6.47,2.94,13.23,4.59,20.38,5.16,8.98.71,17.71.85,26.76.85l32.02.02c9.21,0,18.05-.12,27.32-.9Z"/><path fill="currentColor" d="M165.05,198.84l-19.04.74-43.7.02-11.69-.3c-8.6-.22-18.27-1.24-25.63-5.66-9.33-5.61-14.05-14.82-15.36-25.53-.82-6.69-1.03-13.16-1.05-19.96l-.11-36.72c-.03-9.79.08-19.27.86-28.97.94-11.85,5.56-22.02,15.89-28.19,6.51-3.89,15.05-5.23,22.68-5.42l17.88-.43,34.98-.02c8.68,0,17.06.14,25.64.93,4.11.38,7.92,1.27,11.75,2.61,8.68,3.04,15.53,10.28,18.5,19.01,1.48,4.36,2.37,8.71,2.51,13.34l.62,19.45.07,31.77c.02,9.81-.14,19.3-.75,29.04-.31,5.08-1.36,9.8-3.17,14.47-1.41,3.65-3.49,6.67-6.16,9.48-3.49,3.67-7.6,6.28-12.45,7.91-3.98,1.34-7.94,2.28-12.3,2.45ZM184.49,74.8c0-6.09-4.94-11.03-11.03-11.03s-11.03,4.94-11.03,11.03,4.94,11.03,11.03,11.03,11.03-4.94,11.03-11.03ZM171.52,124.08c0-26.16-21.2-47.36-47.36-47.36s-47.36,21.2-47.36,47.36,21.2,47.36,47.36,47.36,47.36-21.2,47.36-47.36Z"/><circle fill="currentColor" cx="124.17" cy="124.05" r="30.79"/></svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-links-row" style="display: flex; gap: 95px;">
+        <div class="footer-links-col" style="display: flex; flex-direction: column; gap: 9px;">
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">最新情報</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">品牌服務</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">品牌活動</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">活動特輯</a>
+        </div>
+        <div class="footer-links-col" style="display: flex; flex-direction: column; gap: 9px;">
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">最新情報</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">品牌服務</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">品牌活動</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">活動特輯</a>
+        </div>
+        <div class="footer-links-col" style="display: flex; flex-direction: column; gap: 9px;">
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">最新情報</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">品牌服務</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">品牌活動</a>
+          <a href="#" style="color: #666; letter-spacing: 0.05em; transition: 0.2s;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#666'">活動特輯</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== 背景干擾層（只在黑底紅線狀態使用） ==================== -->
+  <canvas id="glitchCanvas" class="glitch-canvas" aria-hidden="true"></canvas>
+
+  <!-- ==================== 回頂端按鈕 ==================== -->
+  <button class="back-to-top" id="backToTop" aria-label="返回頁面頂端">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- ==================== 頁面無敵互動腳本 ==================== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      // --- 回頂端按鈕 ---
+      const backToTop = document.getElementById('backToTop');
+      if (backToTop) {
+        window.addEventListener('scroll', () => {
+          backToTop.classList.toggle('show', window.scrollY > 300);
+        }, { passive: true });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      }
+
+      // --- 1. 圖片點擊切換 ---
+      const thumbnails = document.querySelectorAll('.thumb-item');
+      const mainImage = document.querySelector('#mainProductImage');
+
+      if (thumbnails.length > 0 && mainImage) {
+        thumbnails.forEach(thumb => {
+          thumb.addEventListener('click', function() {
+            thumbnails.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            mainImage.src = this.querySelector('img').src;
+          });
+        });
+      }
+
+      // --- 加入購物車：商品圖往右上角購物車「跳」過去 ---
+      const addBtn = document.querySelector('.btn-add-cart');
+      const cartBtn = document.querySelector('.nav-actions .nav-icon-btn:last-child');
+      let cartCount = 0;
+      const easeInOutQuad = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+      const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+      const landInCart = () => {               // 抵達：購物車彈一下，數字 +1
+        if (!cartBtn) return;
+        cartCount += 1;
+        let badge = cartBtn.querySelector('.cart-badge');
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'cart-badge';
+          cartBtn.appendChild(badge);
+        }
+        badge.textContent = cartCount > 99 ? '99+' : cartCount;
+        badge.classList.remove('pop'); void badge.offsetWidth; badge.classList.add('pop');
+        cartBtn.classList.remove('bump'); void cartBtn.offsetWidth; cartBtn.classList.add('bump');
+      };
+
+      const flyToCart = () => {
+        if (!cartBtn) return;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce || !mainImage) { landInCart(); return; }
+
+        let r = mainImage.getBoundingClientRect();
+        if (r.bottom < 90 || r.top > window.innerHeight) {   // 主圖不在畫面內：改從按鈕飛出去
+          const bb = addBtn.getBoundingClientRect();
+          r = { left: bb.left + bb.width / 2 - 70, top: bb.top + bb.height / 2 - 70, width: 140, height: 140 };
+        }
+        const side = Math.min(r.width, r.height);
+        const c0 = { x: r.left + r.width / 2, y: r.top + r.height / 2 };            // 起點：商品圖中心
+        const cb = cartBtn.getBoundingClientRect();
+        const c1 = { x: cb.left + cb.width / 2, y: cb.top + cb.height / 2 };         // 終點：購物車圖示中心
+        const ctrl = { x: c0.x + (c1.x - c0.x) * 0.12, y: c1.y + 10 };               // 弧線控制點：先往上衝，再滑進購物車
+        const MID = Math.min(130, side);      // 先縮成約 130px 的小圖，再一路飛向購物車
+        const END = 26;                       // 抵達購物車時的大小
+
+        const fly = document.createElement('img');
+        fly.src = mainImage.currentSrc || mainImage.src;
+        fly.className = 'fly-img';
+        fly.style.left = (c0.x - side / 2) + 'px';
+        fly.style.top = (c0.y - side / 2) + 'px';
+        fly.style.width = side + 'px';
+        fly.style.height = side + 'px';
+        document.body.appendChild(fly);
+
+        const DURATION = 950;                                                         // 飛行時間（毫秒）
+        const t0 = performance.now();
+        const step = (now) => {
+          const t = Math.min(1, (now - t0) / DURATION);
+          const u = easeInOutQuad(t);
+          const x = (1 - u) * (1 - u) * c0.x + 2 * (1 - u) * u * ctrl.x + u * u * c1.x;
+          const y = (1 - u) * (1 - u) * c0.y + 2 * (1 - u) * u * ctrl.y + u * u * c1.y;
+          const size = t < 0.25
+            ? side + (MID - side) * easeOutCubic(t / 0.25)                              // 前 25%：快速縮成小圖
+            : MID + (END - MID) * Math.pow((t - 0.25) / 0.75, 2);                       // 其餘：邊飛邊縮到購物車大小
+          const s = size / side;
+          fly.style.transform = `translate(${x - c0.x}px, ${y - c0.y}px) scale(${s})`;
+          fly.style.opacity = t > 0.85 ? String(1 - (t - 0.85) / 0.15) : '1';
+          if (t < 1) { requestAnimationFrame(step); } else { fly.remove(); landInCart(); }
+        };
+        requestAnimationFrame(step);
+      };
+      if (addBtn) addBtn.addEventListener('click', flyToCart);
+
+      // --- 愛心收藏：點一下變實心，再點一下變回空心 ---
+      const wishBtn = document.querySelector('.btn-wishlist');
+      if (wishBtn) {
+        wishBtn.addEventListener('click', () => {
+          const on = wishBtn.classList.toggle('active');
+          wishBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+          wishBtn.setAttribute('aria-label', on ? '取消收藏' : '加入收藏');
+          wishBtn.classList.remove('pop');
+          if (on) { void wishBtn.offsetWidth; wishBtn.classList.add('pop'); }
+        });
+      }
+
+      // --- 2. 數字滾動（Odometer）：只有會變動的尾數會往上滾 ---
+      function createOdometer(el, initial) {
+        const digits = [];            // 由左到右的位數欄
+        el.textContent = '';
+        el.classList.add('odo');
+
+        const makeDigit = (v) => {
+          const col = document.createElement('span');
+          col.className = 'odo-digit';
+          const strip = document.createElement('span');
+          strip.className = 'odo-strip';
+          // 0~9 放兩輪，這樣 9 → 0 也能一路「往上」滾
+          for (let i = 0; i < 20; i++) {
+            const c = document.createElement('span');
+            c.textContent = i % 10;
+            strip.appendChild(c);
+          }
+          col.appendChild(strip);
+          const d = { col, strip, pos: v };
+          strip.style.transition = 'none';
+          strip.style.transform = `translateY(${-v * 1.5}em)`;
+          return d;
+        };
+
+        const roll = (d, target) => {
+          if (d.pos >= 10) {                       // 上一輪還沒歸位，先瞬間歸位
+            d.pos -= 10;
+            d.strip.style.transition = 'none';
+            d.strip.style.transform = `translateY(${-d.pos * 1.5}em)`;
+            void d.strip.offsetHeight;
+          }
+          const cur = d.pos % 10;
+          if (cur === target) return;
+          d.pos += (target - cur + 10) % 10;
+          d.strip.style.transition = '';
+          d.strip.style.transform = `translateY(${-d.pos * 1.5}em)`;
+          setTimeout(() => {                       // 滾完後悄悄把位置拉回 0~9
+            if (d.pos >= 10) {
+              d.pos -= 10;
+              d.strip.style.transition = 'none';
+              d.strip.style.transform = `translateY(${-d.pos * 1.5}em)`;
+              void d.strip.offsetHeight;
+              d.strip.style.transition = '';
+            }
+          }, 620);
+        };
+
+        const set = (n) => {
+          const s = String(n);
+          while (digits.length < s.length) {       // 位數變多（例如 999 → 1000）：在最左邊補一欄
+            const d = makeDigit(0);
+            el.insertBefore(d.col, el.firstChild);
+            digits.unshift(d);
+          }
+          for (let i = 0; i < s.length; i++) {
+            const d = digits[digits.length - s.length + i];
+            roll(d, Number(s[i]));
+          }
+        };
+        // 初始值：不要動畫，直接顯示
+        const s0 = String(initial);
+        for (let i = 0; i < s0.length; i++) {
+          const d = makeDigit(Number(s0[i]));
+          el.appendChild(d.col);
+          digits.push(d);
+        }
+        return { set };
+      }
+
+      const viewCount = document.getElementById('liveViews');
+      const discussCount = document.getElementById('liveDiscuss');
+      const shareCount = document.getElementById('liveShares');
+
+      let views = 1280;
+      let discusses = 980;
+      let shares = 700;
+      let hasStartedLiveStats = false;
+
+      let viewOdo = viewCount ? createOdometer(viewCount, views) : null;
+      let discussOdo = discussCount ? createOdometer(discussCount, discusses) : null;
+      let shareOdo = shareCount ? createOdometer(shareCount, shares) : null;
+
+      const startLiveStats = () => {
+        // 觀看數：每 1 秒飆升 30~80 人
+        setInterval(() => {
+          views += Math.floor(Math.random() * 50) + 30;
+          if (viewOdo) viewOdo.set(views);
+        }, 1000);
+
+        // 討論數：每 1.5 秒增加 10~30 則
+        setInterval(() => {
+          discusses += Math.floor(Math.random() * 20) + 10;
+          if (discussOdo) discussOdo.set(discusses);
+        }, 1500);
+
+        // 分享數：每 2 秒增加 5~15 次
+        setInterval(() => {
+          shares += Math.floor(Math.random() * 10) + 5;
+          if (shareOdo) shareOdo.set(shares);
+        }, 2000);
+      };
+
+      // --- 3. 對話框：依文字長度挑最接近的 SVG 尺寸，右邊留白全部一致 ---
+      const BUBBLE_H = 54;          // 對話框顯示高度（px）
+      const SVG_H = 52.91;          // SVG 原始高度
+      const BUBBLE_VARIANTS = [
+        { w: 163.01, d: 'M139.35.5H26.44C13.65.5,3.28,10.87,3.28,23.66h0c0,4.26,1.16,8.25,3.16,11.68L.86,51.92l15.2-7.57c3.12,1.57,6.65,2.46,10.38,2.46h112.91c12.79,0,23.16-10.37,23.16-23.16h0c0-12.79-10.37-23.16-23.16-23.16Z' },
+        { w: 184.48, d: 'M160.83.5H26.44C13.65.5,3.28,10.87,3.28,23.66h0c0,4.26,1.16,8.25,3.16,11.68L.86,51.92l15.2-7.57c3.12,1.57,6.65,2.46,10.38,2.46h134.39c12.79,0,23.16-10.37,23.16-23.16h0c0-12.79-10.37-23.16-23.16-23.16Z' },
+        { w: 196.06, d: 'M172.41.5H26.44C13.65.5,3.28,10.87,3.28,23.66h0c0,4.26,1.16,8.25,3.16,11.68L.86,51.92l15.2-7.57c3.12,1.57,6.65,2.46,10.38,2.46h145.97c12.79,0,23.16-10.37,23.16-23.16h0c0-12.79-10.37-23.16-23.16-23.16Z' },
+        { w: 218.62, d: 'M194.96.5H26.44C13.65.5,3.28,10.87,3.28,23.66h0c0,4.26,1.16,8.25,3.16,11.68L.86,51.92l15.2-7.57c3.12,1.57,6.65,2.46,10.38,2.46h168.52c12.79,0,23.16-10.37,23.16-23.16h0c0-12.79-10.37-23.16-23.16-23.16Z' },
+        { w: 230.2,  d: 'M206.54.5H26.44C13.65.5,3.28,10.87,3.28,23.66h0c0,4.26,1.16,8.25,3.16,11.68L.86,51.92l15.2-7.57c3.12,1.57,6.65,2.46,10.38,2.46h180.1c12.79,0,23.16-10.37,23.16-23.16h0c0-12.79-10.37-23.16-23.16-23.16Z' },
+        { w: 241.79, d: 'M218.14.5H26.44C13.65.5,3.28,10.87,3.28,23.66h0c0,4.26,1.16,8.25,3.16,11.68L.86,51.92l15.2-7.57c3.12,1.57,6.65,2.46,10.38,2.46h191.7c12.79,0,23.16-10.37,23.16-23.16h0c0-12.79-10.37-23.16-23.16-23.16Z' }
+      ];
+      const bubbleScale = BUBBLE_H / SVG_H;
+      const bubbleImage = (v, inv) => {
+        const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${v.w} ${SVG_H}' preserveAspectRatio='none'><path fill='${inv ? '#000' : '#fff'}' stroke='${inv ? '#fff' : '#000'}' stroke-miterlimit='10' d='${v.d}'/></svg>`;
+        return `url("data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}")`;
+      };
+      const sizeBubble = (el) => {
+          el.style.width = 'max-content';
+          el.style.backgroundImage = 'none';
+          // 文字寬度 + 左側 28px + 右側 24px：每則右邊留白都一樣
+          const need = Math.ceil(el.getBoundingClientRect().width);
+          // 6 種 SVG 裡挑「原始寬度最接近」的那一種，只做 ±5% 內的微調
+          let best = BUBBLE_VARIANTS[0];
+          BUBBLE_VARIANTS.forEach(v => {
+            if (Math.abs(v.w * bubbleScale - need) < Math.abs(best.w * bubbleScale - need)) best = v;
+          });
+          el.style.width = Math.max(need, best.w * bubbleScale * 0.88) + 'px';
+          el.style.backgroundImage = bubbleImage(best, el.parentElement && el.parentElement.classList.contains('chat-stack'));
+      };
+      const sizeBubbles = () => document.querySelectorAll('.chat-bubble').forEach(sizeBubble);
+      sizeBubbles();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeBubbles);   // 網頁字體載入後再量一次
+
+      // --- 4. 咚咚咚往上跳的留言：彈上去、不回彈 ---
+      const commentsTrack = document.getElementById('commentsTrack');
+      let hasStartedMarquee = false;
+
+      const startJumpingComments = () => {
+        const MOVE_MS = 170;
+        const step = () => {
+          if (!window.__commentsScripted && commentsTrack && commentsTrack.children.length) {
+            const firstItem = commentsTrack.firstElementChild;
+            const jumpHeight = firstItem.offsetHeight + parseFloat(getComputedStyle(firstItem).marginBottom);
+            // 整列一起往上推一格：快速、直接到位、沒有回彈
+            commentsTrack.style.transition = `transform ${MOVE_MS}ms cubic-bezier(0.2, 0.6, 0.35, 1)`;
+            commentsTrack.style.transform = `translateY(-${jumpHeight}px)`;
+            firstItem.classList.add('leaving');
+            setTimeout(() => {
+              if (window.__commentsScripted) return;          // 已切到鏡頭段落的留言，不要再把舊的那則放回去
+              commentsTrack.style.transition = 'none';
+              commentsTrack.style.transform = 'translateY(0)';
+              firstItem.classList.remove('leaving');
+              commentsTrack.appendChild(firstItem);
+              // 新留言從下方 18px 往上滑入並淡入
+              firstItem.classList.remove('enter'); void firstItem.offsetWidth; firstItem.classList.add('enter');
+            }, MOVE_MS + 10);
+          }
+          setTimeout(step, 650 + Math.random() * 300);   // 有一點節奏起伏的「咚、咚、咚」
+        };
+        setTimeout(step, 500);
+      };
+
+      // --- 對外介面：給「返回討論區 → 自動拍照」流程使用 ---
+      window.__opaque = {
+        resetStats() {                           // 觀看 / 討論 / 分享 從 0 開始往上跳
+          views = 0; discusses = 0; shares = 0;
+          if (viewCount) viewOdo = createOdometer(viewCount, 0);
+          if (discussCount) discussOdo = createOdometer(discussCount, 0);
+          if (shareCount) shareOdo = createOdometer(shareCount, 0);
+          if (!hasStartedLiveStats) { startLiveStats(); hasStartedLiveStats = true; }
+        },
+        pop() {                                  // 新留言跳出來的短促提示音（用 WebAudio 合成，不需要音檔）
+          try {
+            const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+            const ac = this._ac || (this._ac = new AC()); if (ac.state === 'suspended') ac.resume();
+            const t = ac.currentTime, g = ac.createGain(), o = ac.createOscillator();
+            o.type = 'sine'; o.frequency.setValueAtTime(620, t); o.frequency.exponentialRampToValueAtTime(980, t + 0.07);
+            g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.16, t + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
+            o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + 0.18);
+          } catch (e) { /* 沒聲音也沒關係 */ }
+        },
+        freezeComments() {                       // 進入鏡頭畫面的那一刻就停掉上一段的留言輪播並清空
+          window.__commentsScripted = true;
+          if (!commentsTrack) return;
+          commentsTrack.style.transition = 'none'; commentsTrack.style.transform = 'none';
+          commentsTrack.textContent = '';
+        },
+        startComments(list) {                    // 清空留言欄，像聊天訊息一樣從最底下一則一則跳出、整列往上推（不回彈，最多 7 則）
+          if (!commentsTrack || !list.length) return;
+          window.__commentsScripted = true;
+          commentsTrack.style.transition = 'none'; commentsTrack.style.transform = 'none';
+          commentsTrack.textContent = '';
+          commentsTrack.classList.add('chat-stack');
+          const MAX = 7;
+          let i = 0;
+          const push = () => {
+            const b = document.createElement('div');
+            b.className = 'chat-bubble enter';
+            b.textContent = list[i % list.length]; i++;
+            commentsTrack.appendChild(b);
+            window.__opaque.pop();
+            sizeBubble(b);                          // 只量新的這一則
+            // 整串留言當成一個圖層，從下面往上推一格（新留言從框外的下緣滑進來），直接到位、不回彈
+            const jump = b.offsetHeight + 20;
+            commentsTrack.style.transition = 'none'; commentsTrack.style.transform = `translateY(${jump}px)`;
+            void commentsTrack.offsetHeight;
+            commentsTrack.style.transition = 'transform 170ms cubic-bezier(0.2, 0.6, 0.35, 1)'; commentsTrack.style.transform = 'none';
+            if (commentsTrack.children.length > MAX) {   // 最舊的那則：馬上淡出，不讓它在上緣露出任何一點，再移除
+              const old = commentsTrack.firstElementChild; old.classList.add('out');
+              setTimeout(() => old.remove(), 130);
+            }
+            setTimeout(push, 900 + Math.random() * 700);
+          };
+          push();
+        }
+      };
+
+      // --- 5. 點進討論區：白底被紅色訊號侵入 → 水平切片錯位 → 黑色條帶逐步覆蓋 → 黑紅模式 ---
+      // 分層：① 背景訊號層(canvas) ② 切片錯位層(.slice-layer) ③ 討論區裝飾字(在討論區內) ④ 主要內容(不動) ⑤ Header(完全不動)
+      const HEADER_H = 72;                     // Header 高度：所有特效都從它的下緣開始
+      const SWITCH_MS = 900;                   // 這個時間點才真正換成黑紅配色（此時畫面已被黑色條帶幾乎蓋滿）
+      const STEADY_LEVEL = 0.62;               // 轉場結束後的常駐干擾強度（轉場中最高是 1）
+      const REDS = ['200,22,29', '200,22,29', '170,19,25', '140,16,21', '100,11,15'];   // 主紅 #c8161d 與同色系深淺   // 只用紅色系
+      const rnd = (a, b) => a + Math.random() * (b - a);
+      const rndInt = (a, b) => Math.floor(rnd(a, b + 1));
+      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+      const smooth = (x) => { x = clamp(x, 0, 1); return x * x * (3 - 2 * x); };
+
+      const glitchCanvas = document.getElementById('glitchCanvas');
+      const gctx = glitchCanvas ? glitchCanvas.getContext('2d') : null;
+      let GW = 0, GH = 0;
+      let particles = [];                      // 訊號條 / 色塊（各有自己的長度、位置、速度、壽命）
+      let cover = [];                          // 覆蓋用的黑色條帶（轉場時逐步增加）
+      let rowMask = new Uint8Array(0), coveredRows = 0;
+      let engineTimer = null, engineStart = 0, lastTick = 0;
+      let phase = 'idle';                      // idle → transition → steady
+      let switched = false, peelTicks = 0;
+      let themeVersion = 0;
+
+      const sizeGlitchCanvas = () => {
+        if (!glitchCanvas) return;
+        GW = glitchCanvas.width = window.innerWidth;
+        GH = glitchCanvas.height = Math.max(1, window.innerHeight - HEADER_H);
+        rowMask = new Uint8Array(GH); coveredRows = 0;
+      };
+      sizeGlitchCanvas();
+      window.addEventListener('resize', sizeGlitchCanvas);
+
+      // ---- 干擾強度隨時間變化：轉場中逐漸增強到最高，轉場後降到常駐程度 ----
+      const levelAt = (t) => {
+        if (t < 0) return 0;
+        if (t < 600) return 0.38 + 0.62 * Math.pow(t / 600, 1.1);
+        if (t < SWITCH_MS) return 1;
+        return STEADY_LEVEL + (1 - STEADY_LEVEL) * Math.exp(-(t - SWITCH_MS) / 380);
+      };
+
+      // ---- 產生訊號：很長的橫條 / 中等矩形 / 很短的小色塊，粗細、透明度、速度都不一致 ----
+      const addParticle = (kind, L, inWhite) => {
+        let x, y, w, h, a, life, vx;
+        const edgeX = (width) => {                      // 左右邊緣比較密集
+          const r = Math.random();
+          return r < 0.4 ? rnd(-20, GW * 0.1) : r < 0.8 ? rnd(GW * 0.9 - width, GW) : rnd(0, GW - width);
+        };
+        const biasY = () => (Math.random() < 0.32 ? rnd(GH * 0.78, GH) : rnd(0, GH));   // 下方碎片比較多
+        if (kind === 'long') { w = GW * rnd(0.3, 1); h = rnd(1, 4.5); a = rnd(0.22, 0.75); life = rnd(90, 320); vx = rnd(-500, 500); x = rnd(-GW * 0.2, GW * 0.4); y = rnd(0, GH); }
+        else if (kind === 'medium') { w = rnd(60, 440); h = rnd(4, 20); a = rnd(0.4, 0.85); life = rnd(80, 280); vx = rnd(-260, 260); x = edgeX(w); y = biasY(); }
+        else if (kind === 'small') { w = rnd(6, 42); h = rnd(3, 11); a = rnd(0.5, 0.95); life = rnd(60, 260); vx = rnd(-120, 120); x = edgeX(w); y = biasY(); }
+        else if (kind === 'smear') { w = GW * rnd(0.35, 1); h = rnd(6, 38); a = rnd(0.07, 0.16); life = rnd(80, 220); vx = rnd(-400, 400); x = rnd(-GW * 0.2, GW * 0.4); y = rnd(0, GH); }   // 白底時橫向拖影的灰色寬帶
+        else { w = GW * rnd(0.25, 0.9); h = rnd(1, 3); a = rnd(0.08, 0.2); life = rnd(80, 240); vx = rnd(-300, 300); x = rnd(-GW * 0.1, GW * 0.5); y = rnd(0, GH); }   // 'gray'：白底時的灰色細拖影
+        const c = kind === 'gray' ? '110,110,110' : kind === 'smear' ? '140,130,130' : REDS[rndInt(0, REDS.length - 1)];
+        particles.push({ x, y, w, h, a, life, vx, c, smear: Math.random() < 0.5 });
+      };
+      const addCluster = () => {                                    // 一小群緊鄰的矩形，像影片邊緣那種馬賽克訊號
+        const r = Math.random();
+        const cx = r < 0.4 ? rnd(0, GW * 0.14) : r < 0.8 ? rnd(GW * 0.86, GW - 30) : rnd(0, GW - 30);
+        const cy = Math.random() < 0.4 ? rnd(GH * 0.75, GH) : rnd(0, GH);
+        const life = rnd(90, 300), rows = rndInt(1, 3), vx = rnd(-80, 80);
+        for (let rr = 0; rr < rows; rr++) {
+          let x = cx; const y = cy + rr * rnd(5, 9), h = rnd(4, 10);
+          for (let k = 0, n = rndInt(3, 9); k < n; k++) {
+            const w = rnd(8, 46);
+            particles.push({ x, y, w, h, a: rnd(0.45, 0.95), life: life * rnd(0.7, 1.2), vx, c: REDS[rndInt(0, REDS.length - 1)], smear: false });
+            x += w + (Math.random() < 0.3 ? rnd(2, 14) : 0);
+          }
+        }
+      };
+      const spawn = (L, inWhite) => {
+        const dens = 2.0;                                        // 整體密度（接近參考影片）
+        const n = (base) => { const v = base * L * dens; return Math.floor(v) + (Math.random() < v % 1 ? 1 : 0); };
+        for (let i = 0, k = n(1.6); i < k; i++) addParticle('long', L, inWhite);
+        for (let i = 0, k = n(3.2); i < k; i++) addParticle('medium', L, inWhite);
+        for (let i = 0, k = n(8); i < k; i++) addParticle('small', L, inWhite);
+        for (let i = 0, k = n(0.7); i < k; i++) addCluster();
+        if (inWhite) { for (let i = 0, k = n(2); i < k; i++) addParticle('gray', L, inWhite); for (let i = 0, k = n(1.2); i < k; i++) addParticle('smear', L, inWhite); }
+        if (particles.length > 900) particles.splice(0, particles.length - 900);
+      };
+
+      // ---- 黑色條帶：白色介面逐步被蓋住 ----
+      const addFullBand = () => {
+        const th = rndInt(6, Math.min(80, GH));
+        for (let tries = 0; tries < 14; tries++) {
+          const y = rndInt(0, GH - th);
+          let free = 0; for (let r = y; r < y + th; r++) if (!rowMask[r]) free++;
+          if (free >= th * 0.5) {
+            for (let r = y; r < y + th; r++) if (!rowMask[r]) { rowMask[r] = 1; coveredRows++; }
+            cover.push({ x: 0, y, w: GW, h: th, c: Math.random() < 0.82 ? '0,0,0' : '28,0,0', edge: Math.random() < 0.45 });
+            return;
+          }
+        }
+        for (let r = 0; r < GH; r++) if (!rowMask[r]) {           // 找不到大空位就填第一個空列
+          let e = r; while (e < GH && !rowMask[e] && e - r < 40) { rowMask[e] = 1; coveredRows++; e++; }
+          cover.push({ x: 0, y: r, w: GW, h: e - r, c: '0,0,0', edge: false }); return;
+        }
+      };
+      const growCover = (t) => {
+        const target = smooth((t - 250) / (SWITCH_MS - 250 - 60));
+        let guard = 0;
+        while (coveredRows / GH < target - 0.001 && guard++ < 12) addFullBand();
+        const partial = t < 250 ? 0 : Math.round(rnd(0.4, 2.6) * target);   // 黑色條帶要等紅色訊號先出現一陣子，而且是逐漸變多
+        for (let i = 0, k = partial; i < k; i++) {                  // 不完整的條帶：從左或右侵入，長短不一
+          const fromLeft = Math.random() < 0.5, w = GW * rnd(0.25, 0.85);
+          cover.push({ x: fromLeft ? 0 : GW - w, y: rnd(0, GH), w, h: rnd(3, 34), c: Math.random() < 0.8 ? '0,0,0' : '28,0,0', edge: Math.random() < 0.4 });
+        }
+        if (cover.length > 260) cover.splice(0, cover.length - 260);
+      };
+      const doSwitch = () => {                                     // 此時畫面已被蓋滿：換成黑紅配色，再把黑色條帶一條條剝開
+        switched = true; themeVersion++;
+        cover = []; let y = 0;
+        while (y < GH) { const h = rndInt(14, 70); cover.push({ x: 0, y, w: GW, h, c: '0,0,0', edge: false }); y += h; }
+        document.body.classList.add('hacked');
+        setTimeout(() => document.body.classList.add('private-on'), 180);
+        setTimeout(() => document.body.classList.remove('glitching'), 360);
+        peelTicks = 0;
+      };
+
+      const drawGlitch = (dt, t, L) => {
+        if (!gctx) return;
+        gctx.clearRect(0, 0, GW, GH);
+        // 黑色條帶
+        for (const b of cover) {
+          gctx.fillStyle = `rgb(${b.c})`; gctx.fillRect(b.x, b.y, b.w, b.h);
+          if (b.edge) { gctx.fillStyle = 'rgba(200,22,29,0.5)'; gctx.fillRect(b.x, b.y, b.w, 1); }
+        }
+        // 紅色訊號
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.life -= dt * 1000; p.x += p.vx * dt;
+          if (p.life <= 0) { particles.splice(i, 1); continue; }
+          const al = (p.a * Math.min(1, p.life / 80)).toFixed(2);
+          if ((p.smear || p.h > 5 && p.w > 200) && p.w > 30) {
+            const g = gctx.createLinearGradient(p.x, 0, p.x + p.w, 0);
+            g.addColorStop(0, `rgba(${p.c},0)`); g.addColorStop(0.2, `rgba(${p.c},${al})`);
+            g.addColorStop(0.8, `rgba(${p.c},${al})`); g.addColorStop(1, `rgba(${p.c},0)`);
+            gctx.fillStyle = g;
+          } else gctx.fillStyle = `rgba(${p.c},${al})`;
+          gctx.fillRect(p.x, p.y, p.w, p.h);
+        }
+      };
+
+      const engineTick = () => {
+        const now = performance.now(), t = now - engineStart;
+        const dt = Math.min(0.1, (now - lastTick) / 1000); lastTick = now;
+        const L = phase === 'transition' ? levelAt(t) : STEADY_LEVEL;
+        if (phase === 'transition') {
+          if (!switched && t < SWITCH_MS) growCover(t);
+          else if (!switched) doSwitch();
+          else if (cover.length) {                                 // 剝開黑色條帶
+            peelTicks++;
+            cover = cover.filter(() => Math.random() > 0.38 + peelTicks * 0.08);
+            if (peelTicks > 6) cover = [];
+          }
+          if (switched && !cover.length && t > SWITCH_MS + 400) phase = 'steady';
+        }
+        spawn(phase === 'transition' ? L : levelAt(t), !switched);
+        drawGlitch(dt, t, L);
+        engineTimer = setTimeout(engineTick, 40);
+      };
+      const startEngine = () => { engineStart = performance.now(); lastTick = engineStart; if (!engineTimer) engineTick(); };
+
+      // ---- ② 切片錯位層：偶爾把畫面的一條水平區域（8~30px 高）短暫向左或向右位移，再立刻恢復 ----
+      const sliceLayer = document.createElement('div');
+      sliceLayer.className = 'slice-layer';
+      sliceLayer.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(sliceLayer);
+      const slicePool = [];
+      const buildSliceContent = (slot) => {
+        slot.inner.textContent = '';
+        const wrap = document.createElement('div');
+        wrap.style.paddingTop = 'calc(var(--navbar-height) + 48px)';            // 與 body 相同，讓副本和原頁面位置一致
+        ['.pdp-container', 'footer.footer'].forEach(sel => {
+          const src = document.querySelector(sel);
+          if (!src) return;
+          const c = src.cloneNode(true);
+          c.removeAttribute('id'); c.querySelectorAll('[id]').forEach(e => e.removeAttribute('id'));
+          c.querySelectorAll('.glitch-big, .glitch-big-sub, .glitch-text, .glitch-member-only, .glitch-bars, .cam-layer, .main-video').forEach(e => e.remove());   // 討論區專屬的裝飾字只存在討論區裡，不放進切片副本
+          wrap.appendChild(c);
+        });
+        slot.inner.appendChild(wrap);
+        slot.builtAt = performance.now(); slot.theme = themeVersion;
+      };
+      const getSlot = () => {
+        let slot = slicePool.find(s => !s.busy);
+        if (!slot && slicePool.length < 4) {
+          const el = document.createElement('div'); el.className = 'slice';
+          const inner = document.createElement('div'); el.appendChild(inner); inner.className = 'slice-inner';
+          sliceLayer.appendChild(el);
+          slot = { el, inner, busy: false, builtAt: 0, theme: -1 }; slicePool.push(slot);
+        }
+        return slot;
+      };
+      const pickSliceY = (h) => {
+        const minY = HEADER_H, maxY = window.innerHeight - h;
+        const sec = document.getElementById('discussionSection');
+        if (sec && Math.random() < 0.6) {
+          const r = sec.getBoundingClientRect();
+          if (r.bottom > minY + 40 && r.top < window.innerHeight - 40) {
+            const v = document.querySelector('.video-box').getBoundingClientRect();
+            const roll = Math.random();
+            let y;
+            if (roll < 0.35 && v.bottom > minY + h && v.top < window.innerHeight - h) y = rnd(Math.max(v.top, minY), Math.min(v.bottom, window.innerHeight) - h);   // 影片中間某一條
+            else if (roll < 0.6) y = r.top + rnd(0, r.height * 0.15);                                                                                              // 上方的標題列 / 框線
+            else if (roll < 0.8) y = r.bottom - rnd(0, 40);                                                                                                        // 下緣框線
+            else y = rnd(minY, maxY);
+            return clamp(y, minY, maxY);
+          }
+        }
+        return rnd(minY, maxY);
+      };
+      const spawnSlice = (inTransition) => {
+        if (document.hidden || document.body.classList.contains('modal-open')) return;   // 視窗開著時不做切片（複製整頁很吃效能）
+        const slot = getSlot(); if (!slot) return;
+        const h = inTransition ? rnd(8, 40) : rnd(8, 30);
+        const dx = (Math.random() < 0.5 ? -1 : 1) * (inTransition ? rnd(6, 36) : rnd(4, 18));   // 只位移幾個 pixel
+        const ms = inTransition ? rnd(50, 110) : rnd(60, 150);                                   // 非常短暫，然後立刻恢復
+        const y = pickSliceY(h);
+        if (!slot.inner.firstChild || slot.theme !== themeVersion || performance.now() - slot.builtAt > 4000) buildSliceContent(slot);
+        slot.busy = true;
+        const bg = getComputedStyle(document.body).backgroundColor;
+        const cw = document.documentElement.clientWidth;
+        slot.el.style.cssText = `top:${y - HEADER_H}px;height:${h}px;background:${bg};visibility:visible;`;
+        slot.inner.style.cssText = `width:${cw}px;transform:translate(${dx}px,${-(window.scrollY + y)}px);`;
+        setTimeout(() => { slot.el.style.visibility = 'hidden'; slot.busy = false; }, ms);
+      };
+      let sliceTimer = null;
+      const sliceLoop = () => {
+        const t = performance.now() - engineStart;
+        const inTrans = phase === 'transition' && t < SWITCH_MS + 200;
+        let count, next;
+        if (inTrans) { count = t < 150 ? 0 : t < 500 ? 1 : rndInt(1, 3); next = rnd(55, 110); }          // 轉場中：頻繁
+        else { count = Math.random() < 0.25 ? 2 : 1; next = rnd(1500, 3200); }                           // 轉場後：降頻但不消失
+        for (let i = 0; i < count; i++) spawnSlice(inTrans);
+        sliceTimer = setTimeout(sliceLoop, next);
+      };
+
+      // ---- 音效（維持原樣）：開場的故障聲 → 平滑接上可無縫循環的低頻聲，持續播放 ----
+      const SND_INTRO = 'data:audio/mpeg;base64,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Uufy99JqrKZZ//t4xPUAHN4bORXXgA1ww6YjOYAAL7szTxV0l2v47MckcagGBHZgx+2VSOUP7BT7vkxiIxvDOxvHDD9Qm32kqT3ZRXfyUUM/Zvy6/zCpQan92rkiudZVF5DGY9F3aj8Uf2Yl8NSWGH9j0Pv9HaJMQU1FMy4xMDCqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqoAEDQFlEmQDsARAYh/MZbSck5UU7CrVay0YlcRRngwCAQCSOAQUs0jhwCI5VVTmkUteZljiU41VTmkSWvMyxxKc9VXk2q7zLHEpxqrfJtVrzPo6Z7VXkjW95xqqe1Vrmka8zOeqn///763/scSlqqvMo15mexxKfVV3md8znaqztVd5R15nO1Vn9b3ma8zPaqz1Vd5nfMz6OJS1VXmUWwU0KGQhtVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//t4xISD1IYLGzzzAAgAADSAAAAEVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV';
+      const SND_LOOP = './glitch-loop.ogg';   // 切換之後持續循環的背景音（72 秒，無 Intro）
+      const SND_LOOP_VOLUME = 0.85;
+      const startGlitchSound = () => {
+        try {
+          const intro = new Audio(SND_INTRO);
+          const loop = new Audio(SND_LOOP);
+          loop.loop = true; loop.volume = 0; loop.preload = 'auto';
+          const pi = intro.play();
+          if (pi && pi.catch) pi.catch((err) => console.warn('[sound] 無法播放：', err && err.name));
+          const FADE_MS = 500, INTRO_MS = 2750;
+          setTimeout(() => {
+            const pl = loop.play();                                  // 切換音效快結束時才開始播背景音，這樣聽到的是這首的開頭
+            if (pl && pl.catch) pl.catch((err) => console.warn('[sound] 無法播放：', err && err.name));
+            const t0 = performance.now();
+            const fade = setInterval(() => {
+              const p = Math.min(1, (performance.now() - t0) / FADE_MS);
+              intro.volume = 1 - p;
+              loop.volume = SND_LOOP_VOLUME * p;
+              if (p >= 1) { clearInterval(fade); intro.pause(); }
+            }, 40);
+          }, INTRO_MS - FADE_MS);
+        } catch (err) { console.warn('[sound] 初始化失敗：', err); }
+      };
+
+      // 滑到討論區時先把切片用的副本備好（避免轉場一開始卡一下）
+      const prepareSlices = () => {
+        for (let i = 0; i < 3; i++) setTimeout(() => { const s = getSlot(); if (s && !s.inner.firstChild) buildSliceContent(s); }, 150 * (i + 1));
+      };
+
+      let hasGlitched = false;
+      const triggerGlitch = (e) => {
+        if (e && e.target && e.target.closest('a')) e.preventDefault();   // 「查看更多」的 # 連結不要跳回頁首
+        if (hasGlitched) return;
+        hasGlitched = true;
+
+        if (!hasStartedLiveStats) { startLiveStats(); hasStartedLiveStats = true; }
+        if (!hasStartedMarquee) { startJumpingComments(); hasStartedMarquee = true; }
+        startGlitchSound();
+
+        const cls = document.body.classList;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {     // 減少動態效果：直接切換，不做切片與轉場
+          cls.add('hacked', 'private-on'); themeVersion++;
+          phase = 'steady'; startEngine();
+          return;
+        }
+        cls.add('glitching');                       // 0 ms：白底畫面上先出現紅色水平訊號（背景仍是白色）
+        phase = 'transition'; switched = false; cover = []; particles = [];
+        rowMask = new Uint8Array(GH); coveredRows = 0;
+        startEngine();
+        sliceLoop();                                // 150 ms 起開始出現水平切片位移
+      };
+      const discussionBox = document.getElementById('discussionSection');
+      if (discussionBox) {
+        discussionBox.addEventListener('click', triggerGlitch);
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((en) => { if (en[0].isIntersecting) { prepareSlices(); io.disconnect(); } }, { threshold: 0.05 });
+          io.observe(discussionBox);
+        }
+      }
+
+      // --- 4. 監聽滾動：滑到討論區才啟動特效 ---
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          if (!hasStartedLiveStats) { startLiveStats(); hasStartedLiveStats = true; }
+          if (!hasStartedMarquee) { startJumpingComments(); hasStartedMarquee = true; }
+        }
+      }, { threshold: 0.1 }); 
+
+      const discussionSection = document.getElementById('discussionSection');
+      if (discussionSection) { observer.observe(discussionSection); }
+    });
+  </script>
+
+  <script>
+    /* Custom Cursor：預設黑色；只有加入購物車 / 討論區 hover 變紅；進入討論區後永遠紅色 + glow（見 CSS 的 body.hacked） */
+    (function () {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;   // 手機/觸控不啟用
+      const dot = document.createElement('div');
+      dot.className = 'custom-cursor';
+      const label = document.createElement('div');
+      label.className = 'cursor-label'; label.textContent = 'POV';
+      document.body.appendChild(dot); document.body.appendChild(label);
+      document.documentElement.classList.add('has-cursor');
+      const RED_TARGETS = '.btn-add-cart, #discussionSection';
+      const CLICKABLE = 'a, button, input, select, textarea, label, summary, [role="button"], [onclick], .nav-menu-btn, .category-item, .product-card, .thumb-item, .accordion-item, .play-btn, .discussion-section';
+      const isClickable = (t) => {
+        const c = t.closest && t.closest(CLICKABLE);
+        if (c && c.matches('.discussion-section') && document.body.classList.contains('hacked')) return false;   // 進入討論區後它不再是可點擊區域
+        return !!c;
+      };
+      document.addEventListener('mousemove', (e) => {
+        dot.style.translate = (e.clientX - 8) + 'px ' + (e.clientY - 8) + 'px';   // 位置用 translate、縮放用 scale，兩者分開，縮放才不會把位置一起縮偏
+        dot.classList.add('visible');
+        dot.classList.toggle('is-red', !!(e.target.closest && e.target.closest(RED_TARGETS)));
+        const inPov = !!(e.target.closest && e.target.closest('.rec-img')) && document.body.classList.contains('modal-2');
+        dot.classList.toggle('is-view', inPov);
+        label.classList.toggle('on', inPov);
+        label.style.translate = (e.clientX - label.offsetWidth / 2 + 1) + 'px ' + (e.clientY - label.offsetHeight / 2) + 'px';
+        dot.classList.toggle('is-small', isClickable(e.target));
+      }, { passive: true });
+      document.documentElement.addEventListener('mouseleave', () => { dot.classList.remove('visible', 'is-red', 'is-small', 'is-view'); label.classList.remove('on'); });
+    })();
+  </script>
+
+  <script>
+    /* 小型 OPAQUE（商品名稱上方）hover：亂碼 → 逐字解碼 → 回到 OPAQUE */
+    (function () {
+      const el = document.querySelector('.brand-name');
+      if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const TEXT = el.textContent.trim();
+      const POOL = 'ABCDEFGHIJKLNOPQRSTUVXYZ0123456789';      // 字母、數字為主（略過特別寬的 M / W）
+      const SYMS = '%#$&?/';                                    // 符號只偶爾出現
+      const rand = () => Math.random() < 0.12 ? SYMS[Math.floor(Math.random() * SYMS.length)] : POOL[Math.floor(Math.random() * POOL.length)];
+
+      const SCRAMBLE_MS = 160;      // 先亂跳這麼久
+      const STAGGER_MS = 45;        // 之後每個字元依序解碼的間隔
+      const TICK_MS = 45;           // 亂碼變換速度
+      let spans = [], raf = 0;
+
+      /* 依原本字型實際排版，量出每個字元佔的寬度（含字距與 kerning），之後每個字元固定這個寬度 */
+      const build = () => {
+        const node = el.firstChild;
+        if (!node || node.nodeType !== 3) return;
+        const fs = parseFloat(getComputedStyle(el).fontSize);
+        const r = document.createRange();
+        const lefts = [], last = {};
+        for (let i = 0; i < TEXT.length; i++) {
+          r.setStart(node, i); r.setEnd(node, i + 1);
+          const b = r.getBoundingClientRect();
+          lefts.push(b.left); last.w = b.width;
+        }
+        el.setAttribute('aria-label', TEXT);
+        el.textContent = '';
+        spans = [...TEXT].map((ch, i) => {
+          const w = i < TEXT.length - 1 ? lefts[i + 1] - lefts[i] : last.w;
+          const sp = document.createElement('span');
+          sp.className = 'sc'; sp.setAttribute('aria-hidden', 'true');
+          sp.style.width = (w / fs) + 'em';                   // 用 em，換字級或縮放也會等比
+          sp.textContent = ch;
+          el.appendChild(sp);
+          return sp;
+        });
+      };
+
+      const play = () => {
+        cancelAnimationFrame(raf);                              // 重複進出：先停掉上一輪，不會疊加
+        const t0 = performance.now();
+        let lastTick = -TICK_MS;
+        const frame = (now) => {
+          const t = now - t0;
+          const tick = t - lastTick >= TICK_MS;
+          if (tick) lastTick = t;
+          let finished = true;
+          spans.forEach((sp, i) => {
+            const resolveAt = SCRAMBLE_MS + i * STAGGER_MS;
+            if (t >= resolveAt) { if (sp.textContent !== TEXT[i]) sp.textContent = TEXT[i]; }
+            else { finished = false; if (tick) sp.textContent = rand(); }
+          });
+          if (!finished) raf = requestAnimationFrame(frame);
+        };
+        raf = requestAnimationFrame(frame);
+      };
+
+      const init = () => {
+        build();
+        el.addEventListener('mouseenter', play);
+        el.addEventListener('mouseleave', () => {               // 離開：立刻回到完整 OPAQUE
+          cancelAnimationFrame(raf);
+          spans.forEach((sp, i) => { sp.textContent = TEXT[i]; });
+        });
+      };
+      (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(init);   // 等字型載入後再量寬度
+    })();
+  </script>
+
+  <script>
+    /* 商品頁進場動畫：等主圖載入（最久 1 秒）後，一次開始整串依序進場 */
+    (function () {
+      const h = document.documentElement;
+      if (!h.classList.contains('pdp-pre')) return;
+      let started = false;
+      const start = () => {
+        if (started) return; started = true;
+        h.classList.add('pdp-enter');
+        h.classList.remove('pdp-pre');
+        setTimeout(() => h.classList.remove('pdp-enter'), 3000);      // 動畫結束後把 class 清掉，頁面回到最乾淨的狀態
+      };
+      const img = document.getElementById('mainProductImage');
+      if (img && !img.complete) {
+        img.addEventListener('load', start); img.addEventListener('error', start);
+        setTimeout(start, 1000);                                        // 圖片太慢也不要讓內容一直藏著
+      } else start();
+    })();
+  </script>
+
+  <!-- ==================== 播放後視窗 ==================== -->
+  <div class="gate-dim" id="gateDim"></div>
+  <div class="gate-box" id="gateBox" role="dialog" aria-label="觀看權限尚未解鎖">
+    <button class="gate-close" id="gateClose" type="button" aria-label="關閉"><svg viewBox="0 0 24 24"><path d="M1 1l22 22M23 1L1 23"/></svg></button>
+    <div class="gate-eyebrow">ACCESS RESTRICTED</div>
+    <div class="gate-title">觀看權限<em>尚未解鎖</em></div>
+    <div class="gate-sub">上傳「原創影片」取得完整播放權限</div>
+    <div class="gate-en">ORIGINAL CONTENT REQUIRED<br>LEVEL 01 &nbsp;/&nbsp; VIEWING PERMISSION</div>
+    <button class="gate-next" id="gateNext" type="button"><span>下一步</span><svg viewBox="0 0 10 16"><path d="M1 1l8 7-8 7"/></svg></button>
+    <button class="gate-back" id="gateBack" type="button">返回討論區</button>
+  </div>
+  <div class="up-wrap" id="upWrap" role="dialog" aria-label="上傳原創影片取得觀看權限">
+    <button class="up-close" id="upClose" type="button" aria-label="關閉"><svg viewBox="0 0 24 24"><path d="M1 1l22 22M23 1L1 23"/></svg></button>
+    <div class="up-box">
+      <div class="up-inner">
+        <div class="up-title">上傳原創影片<em>取得觀看權限</em></div>
+        <div class="up-sub">請上傳您拍攝的原創影片，系統將審核內容以解鎖完整觀看權限。</div>
+        <div class="up-line l1"></div>
+        <div class="up-zone" id="upZone">
+          <svg class="cloud" viewBox="0 0 100 80"><path d="M30 62H25A19 19 0 0 1 22 26A23 23 0 0 1 66 20A19 19 0 0 1 76 62H70"/><path d="M50 68V34M36 47L50 33L64 47"/></svg>
+          <div class="up-main" id="upMain">拖曳影片至此，或點擊選擇檔案</div>
+          <div class="up-note">支援 MP4・MOV・AVI 等常見格式<br>檔案大小上限 2GB</div>
+          <button class="up-pick" id="upPick" type="button">選擇檔案</button>
+          <input type="file" id="upFile" accept="video/*" hidden>
+        </div>
+      </div>
+      <div class="up-foot">
+        <div class="up-line"></div>
+        <div class="row"><span class="ask">目前沒有原創影片？</span><button class="up-rec" id="upRec" type="button"><span>查看推薦設備</span><svg viewBox="0 0 10 16"><path d="M1 1l8 7-8 7"/></svg></button></div>
+      </div>
+    </div>
+  </div>
+  <div class="rec-sheet" id="recSheet" role="dialog" aria-label="尚未具備原創內容上傳條件">
+    <div class="rec-head"><div class="zh">尚未具備原創內容<em>上傳條件</em></div><div class="sub">系統已為您篩選適用設備，取得裝置並拍攝原創影片以解鎖觀看權限。</div></div>
+    <div class="rec-grid">
+      <div class="rec-card"><div class="rec-img"><img src="./images/household_2.png" alt="不鏽鋼鏡子"><img class="va" src="./images/household_2_VA.png" alt=""></div>
+        <div class="rec-row"><span>不鏽鋼鏡子</span><span class="price">$790</span></div>
+        <div class="rec-tag"># 衛浴專用</div><div class="rec-use">適用｜高濕度環境、乾濕分離區</div>
+        <button class="rec-add" type="button">加入購物車</button></div>
+      <div class="rec-card"><div class="rec-img"><img src="./images/Spatial%20Facilities_1.png" alt="煙霧偵測器"><img class="va" src="./images/Spatial%20Facilities_1_VA.png" alt=""></div>
+        <div class="rec-row"><span>煙霧偵測器</span><span class="price">$990</span></div>
+        <div class="rec-tag"># 天花板俯角</div><div class="rec-use">適用｜床鋪正上方、客廳全景</div>
+        <button class="rec-add" type="button">加入購物車</button></div>
+      <div class="rec-card"><div class="rec-img"><img src="./images/household_5.png" alt="白熊絨毛玩偶"><img class="va" src="./images/household_5_VA.png" alt=""></div>
+        <div class="rec-row"><span>白熊絨毛玩偶</span><span class="price">$880</span></div>
+        <div class="rec-tag"># 床畔無防備視角</div><div class="rec-use">適用｜枕邊親密距離、混入玩具收藏區</div>
+        <button class="rec-add" type="button">加入購物車</button></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const dim = document.getElementById('gateDim'), box = document.getElementById('gateBox'), sheet = document.getElementById('recSheet'), next = document.getElementById('gateNext');
+      const body = document.body;
+      const open1 = () => { if (window.__warmFace) window.__warmFace(); body.classList.add('modal-open', 'modal-1'); dim.classList.add('show'); box.classList.add('show'); };
+      const vbox = document.querySelector('.video-box'), mv = document.querySelector('.main-video');
+      const playVideo = () => {                  // 播放這部 4 秒影片，播完自動跳出「觀看權限尚未解鎖」
+        if (!mv || !vbox) { open1(); return; }
+        vbox.classList.add('is-playing');
+        // 偵測模型的載入與暖機（會短暫佔住主執行緒）放在影片播放的這 4 秒裡做：此時使用者只是在看影片，滑鼠不動；先等 0.7 秒讓播放鍵消失、影片出現
+        setTimeout(() => { if (window.__warmFace) window.__warmFace(); }, 700);
+        mv.onended = () => open1();
+        mv.onerror = () => open1();
+        try { mv.currentTime = 0; const pr = mv.play(); if (pr && pr.catch) pr.catch(() => open1()); } catch (e) { open1(); }
+      };
+      window.__resetPlayer = () => { if (mv) { mv.pause(); mv.currentTime = 0; } if (vbox) vbox.classList.remove('is-playing'); };
+      const up = document.getElementById('upWrap');
+      let extTimer = null;
+      const toUpload = () => {                    // 下一步 → 上傳原創影片視窗；過 2 秒後視窗往下延伸，出現「目前沒有原創影片？」
+        body.classList.remove('modal-1'); body.classList.add('modal-up'); box.classList.remove('show');
+        setTimeout(() => up.classList.add('show'), 120);
+        clearTimeout(extTimer); extTimer = setTimeout(() => up.classList.add('ext'), 2300);
+      };
+      const to2 = () => { clearTimeout(extTimer); body.classList.remove('modal-up'); body.classList.add('modal-2'); up.classList.remove('show'); setTimeout(() => sheet.classList.add('show'), 120); };
+      const closeAll = () => { clearTimeout(extTimer); body.classList.remove('modal-open', 'modal-1', 'modal-up', 'modal-2'); dim.classList.remove('show'); box.classList.remove('show'); sheet.classList.remove('show'); up.classList.remove('show'); setTimeout(() => { if (!up.classList.contains('show')) up.classList.remove('ext'); }, 300); };
+      // 只有在黑紅模式轉場完成後，按播放鍵才會跳出視窗
+      document.addEventListener('click', (e) => {
+        const play = e.target.closest && e.target.closest('.play-btn');
+        if (play && body.classList.contains('hacked') && body.classList.contains('private-on') && !body.classList.contains('glitching')) { e.stopPropagation(); playVideo(); }
+      }, true);
+      next.addEventListener('click', toUpload);
+      document.getElementById('upRec').addEventListener('click', to2);
+      document.getElementById('gateClose').addEventListener('click', () => { closeAll(); if (window.__startCapture) window.__startCapture(); });   // 叉叉 → 進入直播畫面
+      document.getElementById('upClose').addEventListener('click', () => { closeAll(); if (window.__startCapture) window.__startCapture(); });   // 叉叉 → 進入直播畫面
+      const upFile = document.getElementById('upFile'), upZone = document.getElementById('upZone'), upMain = document.getElementById('upMain');
+      const picked = (f) => { if (f) upMain.textContent = f.name + '　審核中…'; };           // 只在畫面上顯示檔名，檔案不會被上傳
+      document.getElementById('upPick').addEventListener('click', (e) => { e.stopPropagation(); upFile.click(); });
+      upZone.addEventListener('click', () => upFile.click());
+      upFile.addEventListener('change', () => picked(upFile.files[0]));
+      ['dragenter', 'dragover'].forEach((n) => upZone.addEventListener(n, (e) => { e.preventDefault(); upZone.classList.add('drag'); }));
+      ['dragleave', 'drop'].forEach((n) => upZone.addEventListener(n, (e) => { e.preventDefault(); upZone.classList.remove('drag'); if (n === 'drop') picked(e.dataTransfer.files[0]); }));
+      document.getElementById('gateBack').addEventListener('click', () => { closeAll(); if (window.__startCapture) window.__startCapture(); });
+      const goHome = () => { window.location.href = 'index.html'; };   // 展示用：導購視窗按旁邊（或 Esc）→ 退出回到首頁
+      dim.addEventListener('click', () => { if (sheet.classList.contains('show')) goHome(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && body.classList.contains('modal-2')) { goHome(); return; } if (e.key === 'Escape') { const was1 = body.classList.contains('modal-1') || body.classList.contains('modal-up'); closeAll(); if (was1 && window.__resetPlayer) window.__resetPlayer(); } });
+    })();
+  </script>
+
+  <script>
+    /* 返回討論區 → 開啟前置鏡頭 0.5~1 秒自動拍照定格 → 變黑白大頭貼移到左上角 → 自動偵測文字逐字打出 → 留言一則一則跳出
+       照片只存在這個頁面裡（不會上傳或儲存）；性別 / 年齡 / 情緒是演出用的假資料，並不是真的辨識。 */
+    (function () {
+      const COMMENTS = [
+        '欸，畫面換了', '欸他剛剛是不是看鏡頭了', '笑死，這表情也太真', '蛤？這就退了？', '剛剛不是看得很開心？',
+        '想看別人的，自己就不行喔', '笑死，輪到自己就怕了？', '不是很想知道裡面有什麼？',
+        '都點進來了，現在裝沒事喔', '欸他真的在看鏡頭哈哈', '別躲啊，剛剛不是很敢看', '看別人的時候怎麼沒這麼緊張', '原來被看就不好玩了？'
+      ];
+      const pick = (a) => a[Math.floor(Math.random() * a.length)];
+      let done = false;
+
+      const ts = () => { const d = new Date(Date.now() + 8 * 3600 * 1000); const z = (n) => String(n).padStart(2, '0'); return `${d.getUTCFullYear()}.${z(d.getUTCMonth() + 1)}.${z(d.getUTCDate())} ${z(d.getUTCHours())}:${z(d.getUTCMinutes())}:${z(d.getUTCSeconds())} GMT+8`; };   // 台灣時間（UTC+8），不管電腦設定哪個時區都一樣
+
+      // ---- 臉部偵測：face-api.js（性別 / 年齡 / 表情），模型從 CDN 載入，推論全部在這台電腦的瀏覽器裡完成 ----
+      const FA_JS = 'https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/dist/face-api.js';
+      const FA_MODELS = 'https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.13/model/';
+      const EMOTIONS = ['驚愕', '驚恐', '驚嚇', '錯愕', '震驚'];   // 情緒只會是這幾種
+      let faReady = null;
+      const loadFace = () => faReady || (faReady = new Promise((res) => {
+        const sc = document.createElement('script'); sc.src = FA_JS;
+        sc.onerror = () => res(false);
+        sc.onload = async () => {
+          try {
+            await Promise.all([faceapi.nets.tinyFaceDetector.loadFromUri(FA_MODELS), faceapi.nets.ageGenderNet.loadFromUri(FA_MODELS)]);
+            res(true);
+          } catch (e) { res(false); }
+        };
+        document.head.appendChild(sc);
+      }));
+      // 暖機（編譯 GPU 著色器會卡住主執行緒一下）：只在畫面靜止的時候做——「觀看權限尚未解鎖」視窗跳出的那一刻
+      let faWarm = null;
+      const warmFace = () => faWarm || (faWarm = (async () => {
+        if (!(await loadFace())) return false;
+        await new Promise((r) => setTimeout(r, 250));                              // 先讓視窗畫出來
+        try {
+          const c1 = document.createElement('canvas'); c1.width = c1.height = 192;
+          const c2 = document.createElement('canvas'); c2.width = c2.height = 112;
+          await faceapi.detectSingleFace(c1, new faceapi.TinyFaceDetectorOptions({ inputSize: 192 }));
+          await faceapi.nets.ageGenderNet.predictAgeAndGender(c2);
+        } catch (e) { /* 暖機失敗不影響 */ }
+        return true;
+      })());
+      window.__preloadFace = loadFace;
+      window.__warmFace = warmFace;
+      const startTracking = (layer, video) => {         // 框框跟著偵測到的人臉移動
+        const br = layer.querySelector('.cam-brackets');
+        const setBr = (l, t, w, h) => { br.style.left = l + 'px'; br.style.top = t + 'px'; br.style.width = w + 'px'; br.style.height = h + 'px'; };
+        const W0 = layer.clientWidth, H0 = layer.clientHeight;
+        br.style.transition = 'opacity 0.3s'; setBr(W0 * 0.33, H0 * 0.52 - H0 * 0.28, W0 * 0.34, H0 * 0.56);
+        void br.offsetWidth; br.style.transition = '';
+        let opts = null;
+        const loop = async () => {
+          if (!layer.isConnected) return;
+          try {
+            if (!layer.__pause && !document.hidden && faWarm && video.readyState >= 2 && video.videoWidth) {
+              if (!opts && window.faceapi) opts = new faceapi.TinyFaceDetectorOptions({ inputSize: 192, scoreThreshold: 0.4 });
+              const ready = await faWarm;
+              if (ready && opts) {
+                const det = await faceapi.detectSingleFace(video, opts);
+                if (det) {
+                  const W = layer.clientWidth, H = layer.clientHeight, vw = video.videoWidth, vh = video.videoHeight;
+                  const sc = Math.max(W / vw, H / vh), cx0 = (vw * sc - W) / 2, cy0 = (vh * sc - H) / 2;
+                  const b = det.box, dw = b.width * sc, dh = b.height * sc;
+                  const left = W - (b.x * sc - cx0 + dw);           // 畫面是鏡像的
+                  const top = b.y * sc - cy0;
+                  const bw = dw * 1.45, bh = dh * 1.55;
+                  setBr(left + dw / 2 - bw / 2, top + dh / 2 - bh / 2, bw, bh);
+                }
+              }
+            }
+          } catch (e) { /* 偵測失敗就維持原位 */ }
+          setTimeout(loop, 140);
+        };
+        loop();
+      };
+      const analyze = async (canvas) => {
+        try {
+          if (!(await warmFace())) return null;
+          const r = await faceapi.detectSingleFace(canvas, new faceapi.TinyFaceDetectorOptions({ inputSize: 416, scoreThreshold: 0.4 })).withAgeAndGender();
+          if (!r) return null;
+          const a = Math.round(r.age);
+          return { gender: r.gender === 'female' ? '女性' : '男性', age: Math.max(1, a - 3) + '~' + (a + 3) };
+        } catch (e) { return null; }
+      };
+
+      const typeLine = (el, text) => new Promise((res) => {
+        el.classList.add('typing'); let i = 0;
+        const t = setInterval(() => { el.textContent = text.slice(0, ++i); if (i >= text.length) { clearInterval(t); el.classList.remove('typing'); res(); } }, 75);
+      });
+
+      const grab = async () => {                   // 開鏡頭 → 約 0.8 秒後截一張 → 立刻關閉鏡頭
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return { stream: null };
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 1280 } }, audio: false });
+          return { stream };
+        } catch (e) { return { stream: null }; }
+      };
+
+      window.__startCapture = async function () {
+        if (done) return; done = true;
+        const box = document.querySelector('.video-box'); if (!box) return;
+        const sec = document.getElementById('discussionSection');
+        if (sec) { const t0 = box.getBoundingClientRect().top; sec.classList.add('cam-mode'); const t1 = box.getBoundingClientRect().top; if (t1 !== t0) window.scrollBy({ top: t1 - t0, behavior: 'instant' }); }   // 作者列收掉時，影片在螢幕上的位置不要跳
+        if (window.__opaque) window.__opaque.freezeComments();
+        const play = box.querySelector('.play-btn'); if (play) play.style.display = 'none';
+        const mvid = box.querySelector('.main-video'); if (mvid) { mvid.pause(); mvid.style.display = 'none'; }
+        const layer = document.createElement('div'); layer.className = 'cam-layer live';
+        layer.innerHTML = '<video autoplay playsinline muted></video><div class="cam-scan"></div>' +
+          '<div class="cam-brackets"><b></b><b></b><b></b><b></b></div>' +
+          '<div class="cam-hud"><span class="live">LIVE<i>CAM-01</i></span><span class="cam-time"></span></div><div class="cam-flash"></div>';
+        box.appendChild(layer);
+        const timeEl = layer.querySelector('.cam-time'); timeEl.textContent = ts();
+        setInterval(() => { timeEl.textContent = ts(); }, 1000);
+
+        const { stream } = await grab();
+        const video = layer.querySelector('video');
+        let snap = null;
+        if (stream) {
+          video.srcObject = stream; startTracking(layer, video);
+          await new Promise((res) => { video.onplaying = res; setTimeout(res, 1500); });
+          await new Promise((r) => setTimeout(r, 500 + Math.random() * 400));      // 0.5~0.9 秒
+          const c = document.createElement('canvas'); c.width = video.videoWidth || 640; c.height = video.videoHeight || 480;
+          c.getContext('2d').drawImage(video, 0, 0, c.width, c.height);
+          snap = c; layer.__pause = true;                                         // 拍照到偵測完成之間先暫停追蹤，動畫才不會卡
+          window.addEventListener('pagehide', () => stream.getTracks().forEach((t) => t.stop()));   // 拍完直播繼續，離開頁面才關鏡頭
+        } else {
+          await new Promise((r) => setTimeout(r, 700));
+        }
+        layer.querySelector('.cam-flash').classList.add('go');
+        const id = 'P-' + String(Math.floor(1000 + Math.random() * 9000)) + '-' + String(Math.floor(Math.random() * 90 + 10));
+        const probe = document.createElement('div'); probe.className = 'cam-readout'; probe.style.visibility = 'hidden';
+        probe.innerHTML = '<span class="mono">編號：' + id + '</span>'; layer.appendChild(probe);
+        const tagW = probe.firstChild.offsetWidth; probe.remove();            // 大頭貼和「編號」紅框同寬
+        const thumbH = Math.round(tagW * 1.28);
+        const thumb = document.createElement('div'); thumb.className = 'cam-thumb';
+        thumb.style.width = tagW + 'px'; thumb.style.height = thumbH + 'px';
+        thumb.innerHTML = '<div class="cap"><span>CAPTURED IMAGE</span><span>' + ts().slice(0, 16).replace(' ', ' ') + '</span></div>';
+        if (snap) {                                                                  // 只做一次：縮小、鏡像、轉黑白，之後就是一張很小的圖
+          const TW = 320, TH = 410;
+          const tc = document.createElement('canvas'); tc.width = TW; tc.height = TH;
+          const tx = tc.getContext('2d'); const sc = Math.max(TW / snap.width, TH / snap.height);
+          const dw = snap.width * sc, dh = snap.height * sc;
+          tx.translate(TW, 0); tx.scale(-1, 1); tx.drawImage(snap, (TW - dw) / 2, (TH - dh) / 2, dw, dh);
+          const id0 = tx.getImageData(0, 0, TW, TH), px = id0.data;
+          for (let k = 0; k < px.length; k += 4) { let g = 0.3 * px[k] + 0.59 * px[k + 1] + 0.11 * px[k + 2]; g = Math.max(0, Math.min(255, (g - 128) * 1.2 + 134)); px[k] = px[k + 1] = px[k + 2] = g; }
+          tx.putImageData(id0, 0, 0);
+          const im = document.createElement('img'); im.src = tc.toDataURL('image/jpeg', 0.85); im.alt = ''; thumb.appendChild(im);
+        } else {
+          thumb.style.background = 'repeating-linear-gradient(0deg,#222 0,#222 2px,#111 2px,#111 4px)';
+        }
+        layer.appendChild(thumb);
+        layer.classList.add('captured');
+        thumb.classList.add('show');                                                // 閃一下，大頭貼直接出現在左上角（直播畫面繼續）
+        if (window.__opaque) window.__opaque.startComments(COMMENTS);               // 大頭貼一出現，留言就開始一則一則跳
+        await new Promise((r) => setTimeout(r, 450));
+        const analysis = snap ? Promise.race([analyze(snap), new Promise((r) => setTimeout(() => r(null), 3500))]) : Promise.resolve(null);   // 最多等 3.5 秒
+
+        if (window.__opaque) window.__opaque.resetStats();                          // 觀看 / 討論 / 分享從 0 開始
+        const det = await analysis;                                                   // 真的做臉部偵測（在瀏覽器本機執行）
+        layer.__pause = false;                                                        // 偵測完，框框繼續追人臉
+        const lines = ['編號：' + id, '性別：' + (det ? det.gender : '無法辨識'), '年齡：' + (det ? det.age : '無法辨識'), '情緒：' + pick(EMOTIONS)];
+        const out = document.createElement('div'); out.className = 'cam-readout'; out.style.top = (48 + thumbH + 10) + 'px'; layer.appendChild(out);
+        for (let i = 0; i < lines.length; i++) {
+          const sp = document.createElement('span'); if (i === 0) sp.className = 'mono'; out.appendChild(sp);
+          await typeLine(sp, lines[i]);
+          await new Promise((r) => setTimeout(r, 260));
+        }
+      };
+    })();
+  </script>
+</body>
+</html>
